@@ -25,6 +25,7 @@
 
 #import <UIKit/UIKit.h>
 
+#ifdef INCLUDE_MAIN
 int main(int argc, char *argv[]) {
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
@@ -32,3 +33,4 @@ int main(int argc, char *argv[]) {
     [pool release];
     return retVal;
 }
+#endif
