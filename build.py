@@ -145,7 +145,7 @@ def glob_libfiles():
 	return files
 
 def build_module(manifest,config):
-	rc = os.system("xcodebuild -sdk iphoneos -arch armv6 -arch armv7 -configuration Release")
+	rc = os.system("xcodebuild -sdk iphoneos -configuration Release")
 	if rc != 0:
 		die("xcodebuild failed")
 	rc = os.system("xcodebuild -sdk iphonesimulator -configuration Release")
