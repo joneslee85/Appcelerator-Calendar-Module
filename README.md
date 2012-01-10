@@ -1,13 +1,15 @@
-= Appcelerator Calendar Module
+= Appcelerator Calendar Module Reloaded
 ===========================================
 
-This is a module that displays an iPhone-like calendar widget, based on the work of Keith Lazuka, dba The Polypeptides .
+This is a module that displays an iPhone-like calendar widget, based on the work of Keith Lazuka, dba The Polypeptides.
+
+This version is forked from Scott Montgomerie's original code with fixes.
 
 == Building
 --------------
 
 First download the code:
-	git clone git@github.com:smontgomerie/Appcelerator-Calendar-Module.git
+	git clone git@github.com:joneslee85/Appcelerator-Calendar-Module.git
 
 	cd Appcelerator-Calendar-Module
 
