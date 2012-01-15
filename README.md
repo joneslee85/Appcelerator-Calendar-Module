@@ -54,3 +54,8 @@ You can also use the calendar to save a date (and this needs to be refactored):
 	calendarView.saveEvent(start, end, event.summary, event.location, event.description);
 
 That's pretty much it!  Any edits/improvements are appreciated.
+
+== Issues
+---------
+
+If you do not copy 2 files `icon-back-arrow.png` and `icon-next-arrow.png` to the same folder that contains the `app.js` file, those two buttons will be missing images.
