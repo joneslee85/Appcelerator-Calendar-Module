@@ -32,7 +32,8 @@ CGColorRef kSlateBlueColor, kGridDarkColor, kGridLightColor, kCheckmarkColor,
            kCalendarBodyLightColor, kCalendarBodyDarkColor,
            kLightCharcoalColor, kDarkCharcoalColor,
            kTileRegularTopColor, kTileRegularBottomColor,
-		   kTileDimTopColor, kTileDimBottomColor;
+		   kTileDimTopColor, kTileDimBottomColor,
+           kTileTodayBGColor, kTileTodayTextColor;
 
 // Basic grayscale colors
 CGColorRef kBlackColor, kWhiteColor;
@@ -41,6 +42,7 @@ CGColorRef kBlackColor, kWhiteColor;
 __attribute__((constructor))  // Makes this function run when the app loads
 static void InitKColors()
 {
+    
     kSlateBlueColor = CreateRGB(0.451f, 0.537f, 0.647f, 1.0f);
     kGridDarkColor = CreateRGB(0.667f, 0.682f, 0.714f, 1.0f);
     kGridLightColor = CreateRGB(0.953f, 0.953f, 0.961f, 1.0f);
@@ -54,7 +56,9 @@ static void InitKColors()
     kTileRegularBottomColor = CreateRGB(0.294f, 0.361f, 0.435f, 1.0f);
     kTileDimTopColor = CreateRGB(0.545f, 0.565f, 0.588f, 1.0f);
     kTileDimBottomColor = CreateRGB(0.600f, 0.635f, 0.675f, 1.0f);
-	
+	kTileTodayBGColor = CreateRGB(1.0f, 1.0f, 1.0f, 1.0f);
+    kTileTodayTextColor = CreateRGB(1.0f, 0.0f, 0.0f, 1.0f);
+    
 	kBlackColor = CreateGray(0.0f, 1.0f);
     kWhiteColor = CreateGray(1.0f, 1.0f);
 }

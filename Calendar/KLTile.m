@@ -139,7 +139,7 @@ static void InitKLTile()
     CGFloat width = self.bounds.size.width;
     CGFloat height = self.bounds.size.height;
     
-    CGFloat numberFontSize = floorf(0.5f * width);
+    CGFloat numberFontSize = floorf(0.4f * width);
     
     // create a clipping mask from the text for the gradient
     // NOTE: this is a pain in the ass because clipping a string with more than one letter
@@ -152,10 +152,10 @@ static void InitKLTile()
         CGSize letterSize = [letter sizeWithFont:[UIFont boldSystemFontOfSize:numberFontSize]];
         
         CGContextSaveGState(ctx);  // I will need to undo this clip after the letter's gradient has been drawn
-        [letter drawAtPoint:CGPointMake(4.0f+(letterSize.width*i), 0.0f) withFont:[UIFont boldSystemFontOfSize:numberFontSize]];
-
+        [letter drawAtPoint:CGPointMake(10.0f+(letterSize.width*i), 11.0f) withFont:[UIFont boldSystemFontOfSize:numberFontSize]];
+        
         if ([self.date isToday]) {
-            CGContextSetFillColorWithColor(ctx, kWhiteColor);
+            CGContextSetFillColorWithColor(ctx, kTileTodayTextColor);
             CGContextFillRect(ctx, self.bounds);  
         } else {
             // nice gradient fill for all tiles except today
@@ -175,6 +175,7 @@ static void InitKLTile()
     CGFloat width = self.bounds.size.width;
     CGFloat height = self.bounds.size.height;
     CGFloat lineThickness = [self thinRectangleWidth];  // for grid shadow and highlight
+
     
     // dark grid line
     CGContextSetFillColorWithColor(ctx, kGridDarkColor);
@@ -193,9 +194,9 @@ static void InitKLTile()
         innerBounds.size.width -= lineThickness;
         innerBounds.size.height -= lineThickness;
         innerBounds.origin.y += lineThickness;
-        CGContextSetFillColorWithColor(ctx, kSlateBlueColor);
+        CGContextSetFillColorWithColor(ctx, kTileTodayBGColor);
         CGContextFillRect(ctx, innerBounds);
-        [self drawInnerShadowRect:innerBounds percentage:0.1f context:ctx];
+      //  [self drawInnerShadowRect:innerBounds percentage:0.1f context:ctx];
         CGContextRestoreGState(ctx);
     }
     

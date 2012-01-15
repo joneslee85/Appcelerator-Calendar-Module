@@ -11,7 +11,7 @@
 NSInteger KLDateSort(id date, id kldate, void *context);
 
 @interface MroBinarySearch :NSObject {
-	NSArray *theArray;
+    NSArray *theArray;
 }
 
 - (MroBinarySearch*) initWithArray: (NSArray*) array;

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -75,9 +75,9 @@
 		2F895D1F11F903D600C6E55B /* KLGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLGridView.m; sourceTree = "<group>"; };
 		2F895D2011F903D600C6E55B /* KLTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLTile.h; sourceTree = "<group>"; };
 		2F895D2111F903D600C6E55B /* KLTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLTile.m; sourceTree = "<group>"; };
-		2F895D2211F903D600C6E55B /* left-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-arrow.png"; sourceTree = "<group>"; };
+		2F895D2211F903D600C6E55B /* arrow-left.png */ = {isa = PBXFileReference; path = "arrow-left.png"; sourceTree = "<group>"; };
 		2F895D2311F903D600C6E55B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2F895D2411F903D600C6E55B /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
+		2F895D2411F903D600C6E55B /* arrow-right.png */ = {isa = PBXFileReference; path = "arrow-right.png"; sourceTree = "<group>"; };
 		2F895D2511F903D600C6E55B /* THCalendarInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THCalendarInfo.h; sourceTree = "<group>"; };
 		2F895D2611F903D600C6E55B /* THCalendarInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THCalendarInfo.m; sourceTree = "<group>"; };
 		2FD9F907123FD06800632593 /* MroBinarySearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MroBinarySearch.h; path = ArrayExtensions/MroBinarySearch.h; sourceTree = "<group>"; };
@@ -89,6 +89,8 @@
 		AA747D9E0F9514B9006C5449 /* CalendarModule_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarModule_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libCalendarModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCalendarModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5CA9A4014C08FCD0019CBDD /* icon-back-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-back-arrow.png"; sourceTree = "<group>"; };
+		E5CA9A4114C08FD40019CBDD /* icon-next-arrow.png */ = {isa = PBXFileReference; path = "icon-next-arrow.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,15 +168,17 @@
 				2F895D1911F903D600C6E55B /* KLColors.m */,
 				2F895D1A11F903D600C6E55B /* KLDate.h */,
 				2F895D1B11F903D600C6E55B /* KLDate.m */,
+				E5CA9A4114C08FD40019CBDD /* icon-next-arrow.png */,
 				2F895D1C11F903D600C6E55B /* KLGraphicsUtils.h */,
+				E5CA9A4014C08FCD0019CBDD /* icon-back-arrow.png */,
 				2F895D1D11F903D600C6E55B /* KLGraphicsUtils.m */,
 				2F895D1E11F903D600C6E55B /* KLGridView.h */,
 				2F895D1F11F903D600C6E55B /* KLGridView.m */,
 				2F895D2011F903D600C6E55B /* KLTile.h */,
 				2F895D2111F903D600C6E55B /* KLTile.m */,
-				2F895D2211F903D600C6E55B /* left-arrow.png */,
+				2F895D2211F903D600C6E55B /* arrow-left.png */,
 				2F895D2311F903D600C6E55B /* main.m */,
-				2F895D2411F903D600C6E55B /* right-arrow.png */,
+				2F895D2411F903D600C6E55B /* arrow-right.png */,
 				2F895D2511F903D600C6E55B /* THCalendarInfo.h */,
 				2F895D2611F903D600C6E55B /* THCalendarInfo.m */,
 			);
@@ -254,9 +258,16 @@
 /* Begin PBXProject section */
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "CalendarModule" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* CalendarModule */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
@@ -304,13 +315,13 @@
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/CalendarModule.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CalendarModule_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = CalendarModule;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -326,6 +337,7 @@
 				GCC_PREFIX_HEADER = CalendarModule_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = CalendarModule;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
@@ -339,8 +351,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -353,8 +364,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

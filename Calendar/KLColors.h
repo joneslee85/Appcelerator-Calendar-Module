@@ -29,7 +29,8 @@ kCalendarHeaderLightColor, kCalendarHeaderDarkColor,
 kCalendarBodyLightColor, kCalendarBodyDarkColor,
 kLightCharcoalColor, kDarkCharcoalColor,
 kTileRegularTopColor, kTileRegularBottomColor,
-kTileDimTopColor, kTileDimBottomColor;
+kTileDimTopColor, kTileDimBottomColor,
+kTileTodayBGColor, kTileTodayTextColor;
 
 extern CGColorRef kBlackColor, kWhiteColor;
 

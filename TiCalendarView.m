@@ -24,7 +24,7 @@
 	self = [super init];
 	if (self != nil)
 	{
-		calendarView = [[[KLCalendarView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 360) delegate:self] autorelease];
+		calendarView = [[[KLCalendarView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 265) delegate:self] autorelease];
 		//myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,260,320,160) style:UITableViewStylePlain];
 		
 		id c = [self.proxy valueForUndefinedKey:@"calendarColor"];
@@ -48,7 +48,11 @@
 		}
 		else
 		{
-			myHeaderView.backgroundColor = [UIColor grayColor];
+			myHeaderView.backgroundColor = [UIColor magentaColor];
+           // myHeaderView.backgroundColor = [[UIColor alloc] initWithRed:90.0/255 green:90.0/255 blue:90.0/255 alpha:1.0];
+    //    myHeaderView.backgroundColor = [[UIColor alloc] initWithRed:85.9/255 green:10.6/255 blue:10.6/255 alpha:1.0];
+            
+            
 		}
 		//[myTableView setTableHeaderView:myHeaderView];
 		
@@ -95,7 +99,9 @@
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:MyIdentifier] autorelease];
+		//cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:MyIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier] autorelease];
+        
 	}
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	// [cell setText:@"No Data For Now"];
@@ -123,11 +129,16 @@
 		tile = aTile;
 	}
 	
+	//NSMutableDictionary* data = [NSMutableDictionary dictionaryWithObjectsAndKeys:						[[aTile date] toNSDate],@"date",						nil];
+    
 	NSMutableDictionary* data = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-						[[aTile date] toNSDate],@"date",
-						nil];
-	
+                                 [aTile date],@"date",
+                                 nil];
+
+    
 	[self.proxy fireEvent:@"dateSelected" withObject: data propagate:NO];
+    
+    NSLog(@"Date after exit method is %@", data);
 //	[self _fireEventToListener:@"dateSelected" withObject:[aTile date] listener:callback thisObject:nil];
 }
 

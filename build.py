@@ -11,12 +11,12 @@ cwd = os.path.abspath(os.path.dirname(sys._getframe(0).f_code.co_filename))
 os.chdir(cwd)
 required_module_keys = ['name','version','moduleid','description','copyright','license','copyright','platform','minsdk']
 module_defaults = {
-	'description':'My module',
-	'author': 'Your Name',
-	'license' : 'Specify your license',
-	'copyright' : 'Copyright (c) %s by Your Company' % str(date.today().year),
+	'description':'Modified version of Appcelerator Titanium module that handle events setDate instead of via EventKit',
+	'author': 'Trung LE',
+	'license' : 'MIT',
+	'copyright' : 'Copyright (c) %s by Trung LE' % str(date.today().year),
 }
-module_license_default = "TODO: place your license here and we'll include it in the module distribution"
+module_license_default = "LICENSE"
 
 def replace_vars(config,token):
 	idx = token.find('$(')

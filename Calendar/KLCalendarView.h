@@ -30,8 +30,8 @@
 #import "KLTile.h"
 #import "KLDate.h"
 
-#define KL_CHANGE_MONTH_BUTTON_WIDTH    44.0f
-#define KL_CHANGE_MONTH_BUTTON_HEIGHT   32.0f
+#define KL_CHANGE_MONTH_BUTTON_WIDTH    40.0f
+#define KL_CHANGE_MONTH_BUTTON_HEIGHT   30.0f
 #define KL_SELECTED_MONTH_WIDTH        200.0f
 #define KL_HEADER_HEIGHT                27.0f
 #define KL_HEADER_FONT_SIZE             (KL_HEADER_HEIGHT-6.0f)

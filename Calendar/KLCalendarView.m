@@ -83,7 +83,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 //
 - (void)drawDayNamesInContext:(CGContextRef)ctx
 {
-	NSLog(@"%d", self.bounds.size.width);
+	NSLog(@"%f", self.bounds.size.width);
 	
     CGContextSaveGState(ctx);
     CGContextSetFillColorWithColor(ctx, kTileRegularTopColor);
@@ -208,18 +208,39 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 //
 - (void)addUI
 {
+    CGContextRef ctx=UIGraphicsGetCurrentContext();
+	CGContextSetGrayStrokeColor(ctx,0.5,1);
+	//CGContextSetRGBFillColor (ctx, 0.5, 0, 0, 1);
+	CGContextMoveToPoint	(ctx,  5, 5);
+	CGContextAddLineToPoint	(ctx, 5,  5);
+	CGContextAddLineToPoint	(ctx, 5,  10);
+	CGContextAddLineToPoint	(ctx,  9,  8);
+	CGContextClosePath(ctx);
+	CGContextFillPath(ctx);
+    
+    
+    
+    
+    
+    
     // Create the previous month button on the left side of the view
+    
     CGRect previousMonthButtonFrame = CGRectMake(self.bounds.origin.x,
-                                                 self.bounds.origin.y,
-                                                 KL_CHANGE_MONTH_BUTTON_WIDTH, 
-                                                 KL_CHANGE_MONTH_BUTTON_HEIGHT);
+                                                 self.bounds.origin.y, 
+                                                 KL_CHANGE_MONTH_BUTTON_WIDTH,                                                  KL_CHANGE_MONTH_BUTTON_HEIGHT);
+  
+    NSLog(@"Button view frame: %@", NSStringFromCGRect(previousMonthButtonFrame));
+    
     UIButton *previousMonthButton = [[UIButton alloc] initWithFrame:previousMonthButtonFrame];
-    [previousMonthButton setImage:[UIImage imageNamed:@"left-arrow.png"] forState:UIControlStateNormal];
+    [previousMonthButton setTitle:@"<<<" forState:UIControlStateNormal];
+    
+    [previousMonthButton setImage:[UIImage imageNamed:@"icon-back-arrow.png"] forState:UIControlStateNormal];
     previousMonthButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     previousMonthButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [previousMonthButton addTarget:self action:@selector(showPreviousMonth) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:previousMonthButton];
     [previousMonthButton release];
+    
     
     // Draw the selected month name centered and at the top of the view
     CGRect selectedMonthLabelFrame = CGRectMake((self.bounds.size.width/2.0f) - (KL_SELECTED_MONTH_WIDTH/2.0f),
@@ -233,13 +254,14 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
     _selectedMonthLabel.textAlignment = UITextAlignmentCenter;
     [self addSubview:_selectedMonthLabel];
     
+    
     // Create the next month button on the right side of the view
     CGRect nextMonthButtonFrame = CGRectMake(self.bounds.size.width - KL_CHANGE_MONTH_BUTTON_WIDTH, 
                                              self.bounds.origin.y, 
                                              KL_CHANGE_MONTH_BUTTON_WIDTH, 
                                              KL_CHANGE_MONTH_BUTTON_HEIGHT);
     UIButton *nextMonthButton = [[UIButton alloc] initWithFrame:nextMonthButtonFrame];
-    [nextMonthButton setImage:[UIImage imageNamed:@"right-arrow.png"] forState:UIControlStateNormal];
+    [nextMonthButton setImage:[UIImage imageNamed:@"icon-next-arrow.png"] forState:UIControlStateNormal];
     nextMonthButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     nextMonthButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [nextMonthButton addTarget:self action:@selector(showFollowingMonth) forControlEvents:UIControlEventTouchUpInside];

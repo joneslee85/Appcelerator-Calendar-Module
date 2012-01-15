@@ -127,7 +127,7 @@ static BOOL IsLeapYear(NSInteger year)
 	+ ([components month]*100)
 	+ [components day];
 	
-//	NSLog(@"%d %d", selfComposite, otherComposite); 
+	//NSLog(@"%d %f", selfComposite, otherComposite); 
     
     if (selfComposite < otherComposite)
         return NSOrderedAscending;
@@ -149,7 +149,9 @@ static BOOL IsLeapYear(NSInteger year)
 	
 	NSCalendar *gregorian = [[NSCalendar alloc]
 							 initWithCalendarIdentifier:NSGregorianCalendar];
+    
 	NSDate *date = [gregorian dateFromComponents:components];
+ 
 	return date;
 }
 

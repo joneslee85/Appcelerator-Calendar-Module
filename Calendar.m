@@ -17,6 +17,7 @@
 //	return viewController.view;
 
 	NSLog(@"Calendar calendar");
+    return 0;
 }
 
 @end
