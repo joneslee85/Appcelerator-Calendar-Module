@@ -13,16 +13,14 @@ var calendarView = Ti.Calendar.createView({
 win.add(calendarView);
 
 var today = new Date();
-var nextFiveDay = new Date();
-var nextSixDay = new Date();
-nextFiveDay.setDate(today.getDate()+5);
-nextSixDay.setDate(today.getDate() + 8);
-Ti.API.info(nextFiveDay);
-
 var datesArray = [];//[today, nextFiveDay];
-datesArray.push(today);
-datesArray.push(nextFiveDay);
-datesArray.push(nextSixDay);
+
+for(i=0;i<8;i++){
+	var nextDay = new Date();
+	nextDay.setDate(today.getDate() + i);
+	Ti.API.info("test: " + nextDay.toDateString());
+	datesArray.push(nextDay);
+}
 calendarView.setDates(datesArray);
 
 

@@ -129,11 +129,9 @@
 		tile = aTile;
 	}
 	
-	//NSMutableDictionary* data = [NSMutableDictionary dictionaryWithObjectsAndKeys:						[[aTile date] toNSDate],@"date",						nil];
+	NSMutableDictionary* data = [NSMutableDictionary dictionaryWithObjectsAndKeys:						[[aTile date] toNSDate],@"date",						nil];
     
-	NSMutableDictionary* data = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                 [aTile date],@"date",
-                                 nil];
+//	NSMutableDictionary* data = [NSMutableDictionary dictionaryWithObjectsAndKeys:[[[aTile date] toNSDate],@"date",nil];
 
     
 	[self.proxy fireEvent:@"dateSelected" withObject: data propagate:NO];

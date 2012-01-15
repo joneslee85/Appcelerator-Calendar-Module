@@ -24,80 +24,83 @@
 
 
 - (void)loadView {
-    [super loadView];
-    calendarView = [[[KLCalendarView alloc] initWithFrame:CGRectMake(0.0f, 0.0f,  320.0f, 360) delegate:self] autorelease];
-
-    myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,260,320,160) style:UITableViewStylePlain];
-
-    myTableView.dataSource = self;
-    myTableView.delegate = self;
-    UIView *myHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,myTableView.frame.size.width , 20)];
-    myHeaderView.backgroundColor = [UIColor grayColor];
-    [myTableView setTableHeaderView:myHeaderView];
-
-    [self.view addSubview:myTableView];
-    [self.view addSubview:calendarView];
-    [self.view bringSubviewToFront:myTableView];
-
+	[super loadView];
+	calendarView = [[[KLCalendarView alloc] initWithFrame:CGRectMake(0.0f, 0.0f,  320.0f, 360) delegate:self] autorelease];
+	
+	myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,260,320,160) style:UITableViewStylePlain];
+	
+	myTableView.dataSource = self;
+	myTableView.delegate = self;
+	UIView *myHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,myTableView.frame.size.width , 20)];
+	myHeaderView.backgroundColor = [UIColor grayColor];
+	[myTableView setTableHeaderView:myHeaderView];
+	
+	
+	[self.view addSubview:myTableView];
+	[self.view addSubview:calendarView];
+	[self.view bringSubviewToFront:myTableView];
+	
 }
 #pragma mark tableViewDelegate Methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+	return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+	return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *MyIdentifier = @"MyIdentifier";
-
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:MyIdentifier] autorelease];
-    }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    [cell setText:@"No Data For Now"];
-
-    return cell;
-
+	static NSString *MyIdentifier = @"MyIdentifier";
+	
+	
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+	if (cell == nil) {
+		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:MyIdentifier] autorelease];
+	}
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	[cell setText:@"No Data For Now"];
+	
+	return cell;
+	
 }
 
 
 /*----- Calendar Delegates -----> */
 
 - (void)calendarView:(KLCalendarView *)calendarView tappedTile:(KLTile *)aTile{
-    NSLog(@"Date Selected is %@",[aTile date]);
-
-    [aTile flash];
-
-    /*if(tile == nil)
-        tile = aTile;
-    else
-        [tile restoreBackgroundColor];*/
-
+	NSLog(@"Date Selected is %@",[aTile date]);
+	
+	[aTile flash];
+	
+	/*if(tile == nil)
+		tile = aTile;
+	else
+		[tile restoreBackgroundColor];*/
+	
+	
+	
 }
 
 - (KLTile *)calendarView:(KLCalendarView *)calendarView createTileForDate:(KLDate *)date{
+	
+	
+	CheckmarkTile *tile = [[CheckmarkTile alloc] init];
 
-
-    CheckmarkTile *tile = [[CheckmarkTile alloc] init];
-
-    return tile;
-    
+	return tile;
+	
 }
 
 - (void)didChangeMonths{
-
+	
     UIView *clip = calendarView.superview;
     if (!clip)
         return;
-
+    
     CGRect f = clip.frame;
     NSInteger weeks = [calendarView selectedMonthNumberOfWeeks];
     CGFloat adjustment = 0.f;
-
+    
     switch (weeks) {
         case 4:
             adjustment = (92/321)*360+30;
@@ -113,11 +116,11 @@
     }
     f.size.height = 360 - adjustment;
     clip.frame = f;
-
-    CGRect f2 = CGRectMake(0,260-adjustment,320,160+adjustment);
-    myTableView.frame = f2;
-    [self.view bringSubviewToFront:myTableView];
-    tile = nil;
+	
+	CGRect f2 = CGRectMake(0,260-adjustment,320,160+adjustment);
+	myTableView.frame = f2;
+	[self.view bringSubviewToFront:myTableView];
+	tile = nil;
 }
 
 

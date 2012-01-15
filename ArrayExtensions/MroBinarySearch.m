@@ -31,13 +31,13 @@
     if(comparator == nil)
         comparator = @selector(compare:);
 
-    // check overflow?
+//	check overflow?
     NSInteger min = range.location;
     NSInteger max = range.location + range.length - 1;
 
     while (min <= max)
     {
-        // http://googleresearch.blogspot.com/2006/06/extra-extra-read-all-about-it-nearly.html
+    	// http://googleresearch.blogspot.com/2006/06/extra-extra-read-all-about-it-nearly.html
         const NSInteger mid = min + (max - min) / 2;
         switch ((NSComparisonResult)[key performSelector:comparator withObject:[self objectAtIndex:mid]])
         {
@@ -69,13 +69,13 @@
     if(self.count == 0 || key == nil || comparator == NULL)
         return [self binarySearch:key usingSelector:nil inRange:range];
 
-    // check overflow?
+//	check overflow?
     NSInteger min = range.location;
     NSInteger max = range.location + range.length - 1;
 
     while (min <= max)
     {
-        // http://googleresearch.blogspot.com/2006/06/extra-extra-read-all-about-it-nearly.html
+    	// http://googleresearch.blogspot.com/2006/06/extra-extra-read-all-about-it-nearly.html
         const NSInteger mid = min + (max - min) / 2;
         switch (comparator(key, [self objectAtIndex:mid], context))
         {
@@ -120,13 +120,13 @@
     if (self.count == 0 || key == nil || sortDescriptors == nil || sortDescriptors.count == 0)
         return [self binarySearch:key usingSelector:nil inRange:range];
 
-    // check overflow?
+//	check overflow?
     NSInteger min = range.location;
     NSInteger max = range.location + range.length - 1;
 
     while (min <= max)
     {
-        // http://googleresearch.blogspot.com/2006/06/extra-extra-read-all-about-it-nearly.html
+    	// http://googleresearch.blogspot.com/2006/06/extra-extra-read-all-about-it-nearly.html
         const NSInteger mid = min + (max - min) / 2;
         switch ([self _mroInternalCompare:sortDescriptors a:key b:[self objectAtIndex:mid]])
         {
