@@ -75,9 +75,9 @@
 		2F895D1F11F903D600C6E55B /* KLGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLGridView.m; sourceTree = "<group>"; };
 		2F895D2011F903D600C6E55B /* KLTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLTile.h; sourceTree = "<group>"; };
 		2F895D2111F903D600C6E55B /* KLTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLTile.m; sourceTree = "<group>"; };
-		2F895D2211F903D600C6E55B /* arrow-left.png */ = {isa = PBXFileReference; path = "arrow-left.png"; sourceTree = "<group>"; };
+		2F895D2211F903D600C6E55B /* arrow-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-left.png"; sourceTree = "<group>"; };
 		2F895D2311F903D600C6E55B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2F895D2411F903D600C6E55B /* arrow-right.png */ = {isa = PBXFileReference; path = "arrow-right.png"; sourceTree = "<group>"; };
+		2F895D2411F903D600C6E55B /* arrow-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-right.png"; sourceTree = "<group>"; };
 		2F895D2511F903D600C6E55B /* THCalendarInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THCalendarInfo.h; sourceTree = "<group>"; };
 		2F895D2611F903D600C6E55B /* THCalendarInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THCalendarInfo.m; sourceTree = "<group>"; };
 		2FD9F907123FD06800632593 /* MroBinarySearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MroBinarySearch.h; path = ArrayExtensions/MroBinarySearch.h; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libCalendarModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCalendarModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5CA9A4014C08FCD0019CBDD /* icon-back-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-back-arrow.png"; sourceTree = "<group>"; };
-		E5CA9A4114C08FD40019CBDD /* icon-next-arrow.png */ = {isa = PBXFileReference; path = "icon-next-arrow.png"; sourceTree = "<group>"; };
+		E5CA9A4114C08FD40019CBDD /* icon-next-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-next-arrow.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,7 +311,10 @@
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/CalendarModule.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -330,7 +333,10 @@
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				DSTROOT = /tmp/CalendarModule.dst;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
