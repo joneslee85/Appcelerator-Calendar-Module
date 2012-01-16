@@ -24,7 +24,8 @@
 	self = [super init];
 	if (self != nil)
 	{
-		calendarView = [[[KLCalendarView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 265) delegate:self] autorelease];
+		calendarView = [[[KLCalendarView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 321) delegate:self] autorelease];
+		//calendarView = [[[KLCalendarView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 265) delegate:self] autorelease];
 		//myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,260,320,160) style:UITableViewStylePlain];
 		
 		id c = [self.proxy valueForUndefinedKey:@"calendarColor"];
