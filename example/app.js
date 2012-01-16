@@ -1,6 +1,6 @@
 // open a single window
 var win = Ti.UI.createWindow({
-	backgroundColor:'white'
+  backgroundColor:'white'
 });
 
 var calendarView = Ti.Calendar.createView({
@@ -15,11 +15,11 @@ win.add(calendarView);
 var today = new Date();
 var datesArray = [];//[today, nextFiveDay];
 
-for(i=0;i<8;i++){
-	var nextDay = new Date();
-	nextDay.setDate(today.getDate() + i);
-	Ti.API.info("test: " + nextDay.toDateString());
-	datesArray.push(nextDay);
+for(i=0;i<8;i++) {
+  var nextDay = new Date();
+  nextDay.setDate(today.getDate() + i);
+  Ti.API.info("test: " + nextDay.toDateString());
+  datesArray.push(nextDay);
 }
 calendarView.setDates(datesArray);
 

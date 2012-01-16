@@ -9,15 +9,15 @@ This version is forked from Scott Montgomerie's original code with fixes.
 --------------
 
 First download the code:
-	git clone git@github.com:joneslee85/Appcelerator-Calendar-Module.git
+  git clone git@github.com:joneslee85/Appcelerator-Calendar-Module.git
 
-	cd Appcelerator-Calendar-Module
+  cd Appcelerator-Calendar-Module
 
 Then build the code.
-	./build.py
+  ./build.py
 
 Install the calendar into your app.
-	cp calendarmodule-iphone-xxx.zip ~/Library/Application\ Support/Titanium/
+  cp calendarmodule-iphone-xxx.zip ~/Library/Application\ Support/Titanium/
 
 You'll need to at least touch your iPhone app before including it (assuming you're building with Xcode, not Titanium).
 
@@ -36,21 +36,21 @@ To add a view:
 
 When a date is selected, a 'dateSelected' event is thrown:
 
-	calendarView.addEventListener('dateSelected', function(e) {
+  calendarView.addEventListener('dateSelected', function(e) {
         try {
-	       // Do something with the date
-       	} catch(e) {
+         // Do something with the date
+         } catch(e) {
             Ti.API.info(e);
         }
     });
 
 The component is able to show that there is an event on a certain date with a dot icon.  To set which dates are set:
-	
-	var datesArray = [new Date()];
-	calendarView.setDates(datesArray);
-	
+  
+  var datesArray = [new Date()];
+  calendarView.setDates(datesArray);
+  
 You can also use the calendar to save a date (and this needs to be refactored):
 
-	calendarView.saveEvent(start, end, event.summary, event.location, event.description);
+  calendarView.saveEvent(start, end, event.summary, event.location, event.description);
 
 That's pretty much it!  Any edits/improvements are appreciated.

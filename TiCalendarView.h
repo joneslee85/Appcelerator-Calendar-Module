@@ -14,16 +14,16 @@
 @interface TiCalendarView : TiUIView<KLCalendarViewDelegate, UITableViewDelegate, UITableViewDataSource> {
 
 @private
-	MKMapView *map;
-	KLCalendarView *calendarView;
-	KLTile *currentTile;
-	UITableView *myTableView;
-	NSMutableArray *tableViewData;
-	KLTile *tile;
-	BOOL shouldPushAnotherView;
+    MKMapView *map;
+    KLCalendarView *calendarView;
+    KLTile *currentTile;
+    UITableView *myTableView;
+    NSMutableArray *tableViewData;
+    KLTile *tile;
+    BOOL shouldPushAnotherView;
 
-	NSMutableArray* dates;
-	NSNumber* month;
+    NSMutableArray* dates;
+    NSNumber* month;
 }
 
 @property(nonatomic, retain) NSArray* dates;

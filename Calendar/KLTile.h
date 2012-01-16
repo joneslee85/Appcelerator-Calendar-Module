@@ -37,9 +37,9 @@
 @property(nonatomic, retain) NSString *text;
 @property(nonatomic, retain) KLDate *date;
 
-- (id)init;			// designated initializer
+- (id)init; // designated initializer
 
-- (void)flash;		// flash the tile's background color temporarily
+- (void)flash; // flash the tile's background color temporarily
 
 - (CGColorRef)textTopColor;
 - (void)setTextTopColor:(CGColorRef)color;

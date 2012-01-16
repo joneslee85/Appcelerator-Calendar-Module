@@ -11,13 +11,13 @@
 #import "CheckmarkTile.h"
 
 @interface CalendarViewController : UIViewController<KLCalendarViewDelegate> {
-	KLCalendarView *calendarView;
-	KLTile *currentTile;
-	UITableView *myTableView;
-	NSMutableArray *tableViewData;
-	KLTile *tile;
-	BOOL shouldPushAnotherView;
-	
+    KLCalendarView *calendarView;
+    KLTile *currentTile;
+    UITableView *myTableView;
+    NSMutableArray *tableViewData;
+    KLTile *tile;
+    BOOL shouldPushAnotherView;
+
 }
 
 @end

@@ -54,11 +54,11 @@ static void InitKLTile()
 {
     // prepare the gradient
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    
+
     CGColorRef rawColors[2];
     rawColors[0] = CreateRGB(0.173f, 0.212f, 0.255f, 1.0f);
     rawColors[1] = CreateRGB(0.294f, 0.361f, 0.435f, 1.0f);
-    
+
     CFArrayRef colors = CFArrayCreate(NULL, (void*)&rawColors, 2, NULL);
 
     // create it
@@ -68,7 +68,7 @@ static void InitKLTile()
     CGColorRelease(rawColors[1]);
     CFRelease(colors);
     CGColorSpaceRelease(colorSpace);
-    
+
 }
 
 @interface KLTile ()
@@ -87,9 +87,9 @@ static void InitKLTile()
     self.backgroundColor = [UIColor colorWithCGColor:kCalendarBodyLightColor];
     [self setTextTopColor:kTileRegularTopColor];
     [self setTextBottomColor:kTileRegularBottomColor];
-    
+
     self.clipsToBounds = YES;
-    
+
     return self;
 }
 
@@ -98,7 +98,7 @@ static void InitKLTile()
 
 - (void) touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event
 {
-	UITouch *touch = [touches anyObject];
+    UITouch *touch = [touches anyObject];
     if ([touch tapCount] == 1)
         [self sendActionsForControlEvents:UIControlEventTouchUpInside];
     else
@@ -110,7 +110,7 @@ static void InitKLTile()
     CGFloat width = floorf(rect.size.width);
     CGFloat height = floorf(rect.size.height) + 4;
     CGFloat gradientLength = percentToCover * height;
-    
+
     CGColorRef startColor = CreateRGB(0.0f, 0.0f, 0.0f, 0.4f);  // black 40% opaque
     CGColorRef endColor = CreateRGB(0.0f, 0.0f, 0.0f, 0.0f);    // black  0% opaque
     CGColorRef rawColors[2] = { startColor, endColor };
@@ -138,9 +138,9 @@ static void InitKLTile()
     CGContextSaveGState(ctx);
     CGFloat width = self.bounds.size.width;
     CGFloat height = self.bounds.size.height;
-    
+
     CGFloat numberFontSize = floorf(0.4f * width);
-    
+
     // create a clipping mask from the text for the gradient
     // NOTE: this is a pain in the ass because clipping a string with more than one letter
     //       results in the clip of each letter being superimposed over each other,
@@ -153,7 +153,7 @@ static void InitKLTile()
     for (NSInteger i = 0; i < [self.text length]; i++) {
         NSString *letter = [self.text substringWithRange:NSMakeRange(i, 1)];
         CGSize letterSize = [letter sizeWithFont:[UIFont boldSystemFontOfSize:numberFontSize]];
-        
+
         CGContextSaveGState(ctx);  // I will need to undo this clip after the letter's gradient has been drawn
 
         if (left == 0) {
@@ -176,24 +176,24 @@ static void InitKLTile()
 
         CGContextRestoreGState(ctx);  // get rid of the clip for the current letter        
     }
-    
+
     CGContextRestoreGState(ctx);
 }
 
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    
+
     CGFloat width = self.bounds.size.width;
     CGFloat height = self.bounds.size.height;
     CGFloat lineThickness = [self thinRectangleWidth];  // for grid shadow and highlight
 
-    
+
     // dark grid line
     CGContextSetFillColorWithColor(ctx, kGridDarkColor);
     CGContextFillRect(ctx, CGRectMake(0, 0, width, lineThickness));                    // top
     CGContextFillRect(ctx, CGRectMake(width-lineThickness, 0, lineThickness, height)); // right
-    
+
     // highlight
     CGContextSetFillColorWithColor(ctx, kGridLightColor);
     CGContextFillRect(ctx, CGRectMake(0, lineThickness, width-lineThickness, lineThickness));                    // top
@@ -211,7 +211,7 @@ static void InitKLTile()
       //  [self drawInnerShadowRect:innerBounds percentage:0.1f context:ctx];
         CGContextRestoreGState(ctx);
     }
-    
+
     // Draw the # for this tile
     [self drawTextInContext:ctx];
 }
@@ -220,12 +220,12 @@ static void InitKLTile()
 //      flash
 // 
 //       Flash the tile so that the user knows the tap was register but nothing will happen.
-//      
+//
 - (void)flash
 {
     //self.backgroundColor = [UIColor colorWithCGColor:kTileRegularTopColor];
     self.backgroundColor = [UIColor lightGrayColor];
-	//[self performSelector:@selector(restoreBackgroundColor) withObject:nil afterDelay:0.1f];
+    //[self performSelector:@selector(restoreBackgroundColor) withObject:nil afterDelay:0.1f];
 }
 
 // --------------------------------------------------------------------------------------------
@@ -233,7 +233,7 @@ static void InitKLTile()
 // 
 //       The inverse of flashTile, this is called at the end of the flash duration
 //       to restore the tile's origianl background color.
-//      
+//
 - (void)restoreBackgroundColor
 {
     self.backgroundColor = [UIColor colorWithCGColor:kCalendarBodyLightColor];
@@ -267,14 +267,3 @@ static void InitKLTile()
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-

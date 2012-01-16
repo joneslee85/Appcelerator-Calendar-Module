@@ -25,20 +25,20 @@
 //
 //	  NOTES
 //
-//		(1) KLDate was created because I didn't want to mess around with time,
-//			just dates. Also, some of the CFCalendar* functions are quite
-//			slow on the iPhone (or at least they were in iPhone OS 2.0
-//			when I created this class).
+//      (1) KLDate was created because I didn't want to mess around with time,
+//          just dates. Also, some of the CFCalendar* functions are quite
+//          slow on the iPhone (or at least they were in iPhone OS 2.0
+//          when I created this class).
 //
-//		(2)	Special effort was made such that changing the iPhone's
-//			regional format and timezone would not change the logical date.
-//			This was needed in my application, Goalkeep, because the purpose
-//			of the app was to chain together several days in a row. If you 
-//			changed the timezone or the regional format, I didn't want the 
-//			chain to break just because of international time issues.
-//			
-//		(3) Considering the above notes, it may be prudent 
-//			to replace KLDate with NSDate.
+//      (2) Special effort was made such that changing the iPhone's
+//          regional format and timezone would not change the logical date.
+//          This was needed in my application, Goalkeep, because the purpose
+//          of the app was to chain together several days in a row. If you 
+//          changed the timezone or the regional format, I didn't want the 
+//          chain to break just because of international time issues.
+//
+//      (3) Considering the above notes, it may be prudent 
+//          to replace KLDate with NSDate.
 //
 
 #import <UIKit/UIKit.h>
@@ -73,11 +73,4 @@
 -(NSDate*) toNSDate;
 
 @end
-
-
-
-
-
-
-
 

@@ -30,7 +30,7 @@ void MyDrawText (CGContextRef myContext, CGRect contextRect, CGFloat fontSize, c
     float w, h;
     w = contextRect.size.width;
     h = contextRect.size.height;
-    
+
     CGContextSaveGState(myContext);
     CGContextSelectFont (myContext,
                          "Helvetica-Bold",
@@ -48,7 +48,7 @@ void MyDrawTextAsClip (CGContextRef myContext, CGRect contextRect, CGFloat fontS
     float w, h;
     w = contextRect.size.width;
     h = contextRect.size.height;
-    
+
     CGContextSelectFont (myContext,
                          "Helvetica-Bold",
                          fontSize,
@@ -68,21 +68,21 @@ CGImageRef CreateCGImageFromCALayer(CALayer *sourceLayer)
 {
     CGFloat width = sourceLayer.bounds.size.width;
     CGFloat height = sourceLayer.bounds.size.height;
-    
+
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef ctx = CGBitmapContextCreate(NULL, width, height, 8, 4*width, colorSpace, kCGImageAlphaPremultipliedLast);
     NSCAssert(ctx, @"failed to create bitmap context from CALayer");
-    
+
     // rotate 180 degrees and flip vertically (otherwise the CALayer will render backwards)
     CGAffineTransform xform = CGAffineTransformMake(1.0f, 0.0f, 0.0f, -1.0f, 0.0f, width);
     CGContextConcatCTM(ctx, xform);
-    
+
     // rasterize the UIView's backing layer
     [sourceLayer renderInContext:ctx];
     CGImageRef raster = CGBitmapContextCreateImage(ctx);
-    
+
     CGColorSpaceRelease(colorSpace);
     CGContextRelease(ctx);
-    
+
     return raster;
 }

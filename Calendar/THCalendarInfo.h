@@ -8,13 +8,13 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-	SDCalendarRoundDownRule = (1 << 1),
-	SDCalendarExactCountRule = (1 << 2),
+    SDCalendarRoundDownRule = (1 << 1),
+    SDCalendarExactCountRule = (1 << 2),
 } SDCalendarRoundingRule;
 
 typedef enum {
-	SDCalendar12HourFormat = (1 << 1),
-	SDCalendar24HourFormat = (1 << 2),
+    SDCalendar12HourFormat = (1 << 1),
+    SDCalendar24HourFormat = (1 << 2),
 } SDCalendarHourFormat;
 
 // SDCalendarRoundingRule controls what happens when
@@ -34,18 +34,18 @@ typedef enum {
 
 @interface THCalendarInfo : NSObject {
 
-	CFAbsoluteTime	   _absoluteTime;
-	CFCalendarRef	   _calendar;
-	CFTimeZoneRef	   _timeZone;
-	
-	NSArray			 * _dayNames;
-	NSArray 		 * _monthNames;   
+    CFAbsoluteTime  _absoluteTime;
+    CFCalendarRef   _calendar;
+    CFTimeZoneRef   _timeZone;
+
+    NSArray * _dayNames;
+    NSArray * _monthNames;
 }
-                           
+
 + (id) calendarInfo;
 
 + (SDCalendarRoundingRule) defaultRoundingRule;
-+ (void) setDefaultRoundingRule: (SDCalendarRoundingRule)roundingRule;                               
++ (void) setDefaultRoundingRule: (SDCalendarRoundingRule)roundingRule;
 + (SDCalendarHourFormat) defaultHourFormat;
 + (void) setDefaultHourFormat: (SDCalendarHourFormat)format;
 

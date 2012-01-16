@@ -9,7 +9,7 @@
 @interface TiCalendarViewProxy : TiViewProxy {
 
 @private
-	NSMutableArray* dates;
+    NSMutableArray* dates;
 }
 
 @property(nonatomic, retain) NSArray* dates;

@@ -34,7 +34,7 @@
 {
     if (![super initWithFrame:frame])
         return nil;
-    
+
     self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.clipsToBounds = YES;
     self.backgroundColor = [UIColor colorWithCGColor:kCalendarBodyDarkColor];
@@ -50,21 +50,21 @@
 {
     NSInteger currentColumnIndex = 0;
     NSInteger currentRowIndex = 0;
-    
+
     [UIView beginAnimations:nil context:NULL];
     for (UIView *tileContainer in [self subviews]) {
         CGRect containerFrame = tileContainer.frame;
         containerFrame.size.width = containerFrame.size.height = ([self columnWidth]); // square it up and zoom
         containerFrame.origin.x = currentColumnIndex * [self columnWidth];
         containerFrame.origin.y = currentRowIndex * [self columnWidth]; // tiles are required to be square!
-        
+
         KLTile *tile = [[tileContainer subviews] objectAtIndex:0];
         CGRect tileFrame = containerFrame;
         tileFrame.origin.x = tileFrame.origin.y = 0.0f;
-        
+
         tileContainer.frame = containerFrame;
         tile.frame = tileFrame;
-        
+
         currentColumnIndex++;
         if (currentColumnIndex == _numberOfColumns) {
             currentRowIndex++;
@@ -98,13 +98,13 @@
 - (void)flipView:(UIView *)viewToBeRemoved toRevealView:(UIView *)replacementView transition:(UIViewAnimationTransition)transition
 {
     [UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:1];
+    [UIView setAnimationDuration:1];
     UIView *container = [viewToBeRemoved superview];
-	[UIView setAnimationTransition:transition forView:container cache:YES];
-	[viewToBeRemoved removeFromSuperview];
-	[container addSubview:replacementView];
+    [UIView setAnimationTransition:transition forView:container cache:YES];
+    [viewToBeRemoved removeFromSuperview];
+    [container addSubview:replacementView];
     [self setNeedsLayout];
-	[UIView commitAnimations];
+    [UIView commitAnimations];
 }
 
 - (KLTile *)tileOrNilAtIndex:(NSInteger)tileIndex
@@ -121,7 +121,7 @@
 - (void)redrawNeighborsAndTile:(KLTile *)tile
 {
     NSInteger tileIndex = [_tiles indexOfObject:tile];
-    
+
     [[self tileOrNilAtIndex:tileIndex-_numberOfColumns+1] setNeedsDisplay]; // top left
     [[self tileOrNilAtIndex:tileIndex-_numberOfColumns] setNeedsDisplay];   // top
     [[self tileOrNilAtIndex:tileIndex-_numberOfColumns-1] setNeedsDisplay]; // top right
@@ -148,19 +148,18 @@
 
 -(void) resetAllTiles
 {
-	for (KLTile *tile in _tiles)
+    for (KLTile *tile in _tiles)
         [tile restoreBackgroundColor];
 }
 
 -(NSMutableArray*) tiles
 {
-	return _tiles;
+    return _tiles;
 }
 
 - (void)dealloc {
     [_tiles release];
-	[super dealloc];
+    [super dealloc];
 }
-
 
 @end

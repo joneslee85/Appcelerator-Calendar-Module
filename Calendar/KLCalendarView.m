@@ -61,7 +61,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 {
     if (![super initWithFrame:frame])
         return nil;
-    
+
     self.delegate = aDelegate;
     self.backgroundColor = [UIColor colorWithCGColor:kCalendarBodyLightColor];
     //self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -69,8 +69,8 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
     _trackedTouchPoints = [[NSMutableArray alloc] init];
     _model = [[KLCalendarModel alloc] init];
     [self addUI];     // Draw the calendar itself (arrows, month & year name, empty grid)
-    [self refreshViewWithPushDirection:nil]; // add tiles to the grid    
-    
+    [self refreshViewWithPushDirection:nil]; // add tiles to the grid
+
     return self;
 }
 
@@ -83,28 +83,28 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 //
 - (void)drawDayNamesInContext:(CGContextRef)ctx
 {
-	NSLog(@"%f", self.bounds.size.width);
-	
+    NSLog(@"%f", self.bounds.size.width);
+
     CGContextSaveGState(ctx);
     CGContextSetFillColorWithColor(ctx, kTileRegularTopColor);
     CGContextSetShadowWithColor(ctx, CGSizeMake(0.0f, -1.0f), 1.0f, kWhiteColor);
-    
+
     for (NSInteger columnIndex = 0; columnIndex < 7; columnIndex++) {
         NSString *header = [_model dayNameAbbreviationForDayOfWeek:columnIndex];
-        
+
         CGFloat columnWidth = self.bounds.size.width / 7;
-		
-		
-		
+
+
+
         CGFloat fontSize = 0.25f * columnWidth;
         CGFloat xOffset = columnIndex * columnWidth;
         CGFloat yOffset = (0.94f * [self headerHeight]) - fontSize;
-        
-//		NSLog(@"col width = %f7, fontSize = %f", columnWidth, fontSize);
+
+        // NSLog(@"col width = %f7, fontSize = %f", columnWidth, fontSize);
 
         [header drawInRect:CGRectMake(xOffset, yOffset, columnWidth, fontSize) withFont: [UIFont boldSystemFontOfSize:fontSize] lineBreakMode: UILineBreakModeClip alignment: UITextAlignmentCenter];
     }
-    
+
     CGContextRestoreGState(ctx);
 }
 
@@ -116,16 +116,16 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 - (void)drawGradientHeaderInContext:(CGContextRef)ctx
 {
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    
+
     CGColorRef rawColors[2] = { kCalendarHeaderLightColor, kCalendarHeaderDarkColor };
     CFArrayRef colors = CFArrayCreate(NULL, (void*)&rawColors, 2, NULL);
-    
+
     CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, colors, NULL);
     CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0,0), CGPointMake(0, [self headerHeight]), kCGGradientDrawsBeforeStartLocation);
-    
+
     CGGradientRelease(gradient);
     CFRelease(colors);
-    CGColorSpaceRelease(colorSpace);    
+    CGColorSpaceRelease(colorSpace);
 }
 
 
@@ -167,7 +167,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
     numTiles = 0;
     // tiles for dates that belong to the final week of the previous month
     for (KLDate *date in [_model daysInFinalWeekOfPreviousMonth]) {
-		KLTile *tile = [self.delegate calendarView:self createTileForDate:date];
+        KLTile *tile = [self.delegate calendarView:self createTileForDate:date];
         [tile addTarget:self action:@selector(showPreviousMonth) forControlEvents:UIControlEventTouchUpInside];
         tile.date = date;
         tile.text = [NSString stringWithFormat:@"%ld", (long)[date dayOfMonth]];
@@ -177,11 +177,11 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
         [tile release];
         numTiles++;
     }
-    
+
     // tiles for dates that belong to the selected month
     NSArray *days = [_model daysInSelectedMonth];
     for (KLDate *date in days) {
-		KLTile *tile = [self.delegate calendarView:self createTileForDate:date];
+        KLTile *tile = [self.delegate calendarView:self createTileForDate:date];
         [tile addTarget:self action:@selector(tileInSelectedMonthTapped:) forControlEvents:UIControlEventTouchUpInside];
         tile.date = date;
         tile.text = [NSString stringWithFormat:@"%ld", (long)[date dayOfMonth]];
@@ -189,10 +189,10 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
         [tile release];
         numTiles++;
     }
-    
+
     // tiles for dates that belong to the first week of the following month
     for (KLDate *date in [_model daysInFirstWeekOfFollowingMonth]) {
-		KLTile *tile = [self.delegate calendarView:self createTileForDate:date];
+        KLTile *tile = [self.delegate calendarView:self createTileForDate:date];
         [tile addTarget:self action:@selector(showFollowingMonth) forControlEvents:UIControlEventTouchUpInside];
         tile.date = date;
         tile.text = [NSString stringWithFormat:@"%ld", (long)[date dayOfMonth]];
@@ -212,30 +212,30 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 //
 - (void)addUI
 {
-    
+
     // Create the previous month button on the left side of the view
-    
+
     CGRect previousMonthButtonFrame = CGRectMake(self.bounds.origin.x,
                                                  self.bounds.origin.y, 
                                                  KL_CHANGE_MONTH_BUTTON_WIDTH,                                                  KL_CHANGE_MONTH_BUTTON_HEIGHT);
-  
+
     NSLog(@"Button view frame: %@", NSStringFromCGRect(previousMonthButtonFrame));
-    
+
     UIButton *previousMonthButton = [[UIButton alloc] initWithFrame:previousMonthButtonFrame];
-   // [previousMonthButton setTitle:@"<<<" forState:UIControlStateNormal];
-    
+    // [previousMonthButton setTitle:@"<<<" forState:UIControlStateNormal];
+
     [previousMonthButton setImage:[UIImage imageNamed:@"icon-back-arrow.png"] forState:UIControlStateNormal];
     previousMonthButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     previousMonthButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [previousMonthButton addTarget:self action:@selector(showPreviousMonth) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:previousMonthButton];
     [previousMonthButton release];
-    
-    
+
+
     // Draw the selected month name centered and at the top of the view
     CGRect selectedMonthLabelFrame = CGRectMake((self.bounds.size.width/2.0f) - (KL_SELECTED_MONTH_WIDTH/2.0f),
-                                                self.bounds.origin.y, 
-                                                KL_SELECTED_MONTH_WIDTH, 
+                                                self.bounds.origin.y,
+                                                KL_SELECTED_MONTH_WIDTH,
                                                 KL_HEADER_HEIGHT);
     _selectedMonthLabel = [[UILabel alloc] initWithFrame:selectedMonthLabelFrame];
     _selectedMonthLabel.textColor = [UIColor colorWithCGColor:kTileRegularTopColor];
@@ -243,12 +243,12 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
     _selectedMonthLabel.font = [UIFont boldSystemFontOfSize:KL_HEADER_FONT_SIZE];
     _selectedMonthLabel.textAlignment = UITextAlignmentCenter;
     [self addSubview:_selectedMonthLabel];
-    
-    
+
+
     // Create the next month button on the right side of the view
-    CGRect nextMonthButtonFrame = CGRectMake(self.bounds.size.width - KL_CHANGE_MONTH_BUTTON_WIDTH, 
-                                             self.bounds.origin.y, 
-                                             KL_CHANGE_MONTH_BUTTON_WIDTH, 
+    CGRect nextMonthButtonFrame = CGRectMake(self.bounds.size.width - KL_CHANGE_MONTH_BUTTON_WIDTH,
+                                             self.bounds.origin.y,
+                                             KL_CHANGE_MONTH_BUTTON_WIDTH,
                                              KL_CHANGE_MONTH_BUTTON_HEIGHT);
     UIButton *nextMonthButton = [[UIButton alloc] initWithFrame:nextMonthButtonFrame];
     [nextMonthButton setImage:[UIImage imageNamed:@"icon-next-arrow.png"] forState:UIControlStateNormal];
@@ -257,7 +257,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
     [nextMonthButton addTarget:self action:@selector(showFollowingMonth) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:nextMonthButton];
     [nextMonthButton release];
-     
+
     // The Grid of tiles
     self.grid = [[[KLGridView alloc] initWithFrame:CGRectMake(0,[self headerHeight],320,self.bounds.size.height - [self headerHeight])] autorelease];
     [self addSubview:self.grid];
@@ -284,18 +284,18 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
         [self clearAndFillGrid];
         return;
     }
-    
+
     // Configure the animation for sliding the tiles in
     [CATransaction begin];
     [CATransaction setValue:[NSNumber numberWithBool:YES] forKey:kCATransactionDisableActions];
     [CATransaction setValue:[NSNumber numberWithFloat:0.5f] forKey:kCATransactionAnimationDuration];
-    
+
     CATransition *push = [CATransition animation];
     push.type = kCATransitionPush;
     push.subtype = caTransitionSubtype;
     [self.grid.layer addAnimation:push forKey:kCATransition];
     [self clearAndFillGrid];
-    
+
     [CATransaction commit];
 }
 
@@ -310,7 +310,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 {
     if ([self isZoomedIn])
         return;  // do not allow it when zoomed in
-    
+
     [_model decrementMonth];
     [self refreshViewWithPushDirection:kCATransitionFromLeft];
 }
@@ -327,7 +327,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 {
     if ([self isZoomedIn])
         return;  // do not allow it when zoomed in
-    
+
     [_model incrementMonth];
     [self refreshViewWithPushDirection:kCATransitionFromRight];
 }
@@ -357,11 +357,11 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 {
     [UIView beginAnimations:nil context:NULL];
     CGRect bounds = self.bounds;
-    
+
     // pan
     [self panBounds:&bounds toTile:tile scaleFactor:1.f];
     self.bounds = bounds;
-    
+
     // update
     [self setNeedsDisplay];
     [self.grid redrawNeighborsAndTile:tile];
@@ -378,15 +378,15 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 {
     [UIView beginAnimations:nil context:NULL];
     CGRect bounds = self.bounds;
-    
+
     // pan
     [self panBounds:&bounds toTile:tile scaleFactor:ScaleFactor];
-    
+
     // zoom
     bounds.size.width *= ScaleFactor;
     bounds.size.height *= ScaleFactor;
     self.bounds = bounds;
-    
+
     // update
     [self setNeedsDisplay];
     [self.grid redrawNeighborsAndTile:tile];
@@ -402,12 +402,12 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 {
     [UIView beginAnimations:nil context:NULL];
     CGRect bounds = self.bounds;
-    
+
     bounds.size.width /= ScaleFactor;
     bounds.size.height /= ScaleFactor;
     bounds.origin.x = bounds.origin.y = 0.0f;
     self.bounds = bounds;
-    
+
     [self setNeedsDisplay];
     [self.grid redrawAllTiles];  // the current chain might have changed so we redraw all tiles, not just the neighbors
     [UIView commitAnimations];
@@ -428,12 +428,12 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 //      redrawNeighborsAndTile:
 // 
 //      Tells the calendar to redraw the given tile along with its adjacent tiles.
-//		Motivation: when I zoom into the calendar, there is no need to redraw all of the tiles
-//		since only the centered tile and its neighbors will be visible.
+//      Motivation: when I zoom into the calendar, there is no need to redraw all of the tiles
+//      since only the centered tile and its neighbors will be visible.
 //
 - (void)redrawNeighborsAndTile:(KLTile *)tile
 {
-	[self.grid redrawNeighborsAndTile:tile];
+    [self.grid redrawNeighborsAndTile:tile];
 }
 
 // --------------------------------------------------------------------------------------------
@@ -496,12 +496,12 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 {
     UITouch *touch = [touches anyObject];
     [_trackedTouchPoints addObject:[NSValue valueWithCGPoint:[touch locationInView:self]]];
-    
+
     // bail out if the delegate doesn't implement the swipe gesture handlers
     if (![self.delegate respondsToSelector:@selector(wasSwipedToTheRight)]
         || ![self.delegate respondsToSelector:@selector(wasSwipedToTheLeft)])
         return;
-    
+
     CGFloat minX, maxX, minY, maxY;
     minX = minY = INFINITY;
     maxX = maxY = 0.f;
@@ -521,14 +521,14 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
             CGFloat firstX = [[_trackedTouchPoints objectAtIndex:0] CGPointValue].x;
             CGFloat lastX = [[_trackedTouchPoints lastObject] CGPointValue].x;
             if (firstX < lastX){
-				[self showPreviousMonth];
-				[self.delegate wasSwipedToTheRight];
-			}
+                [self showPreviousMonth];
+                [self.delegate wasSwipedToTheRight];
+            }
             else{
                 [self showFollowingMonth];
-				[self.delegate wasSwipedToTheLeft]; 
-				}
-			}
+                [self.delegate wasSwipedToTheLeft];
+            }
+        }
     }
 
 
@@ -547,7 +547,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
     [_model release];
     [_selectedMonthLabel release];
     [_grid release];
-	[super dealloc];
+    [super dealloc];
 }
 
 @end

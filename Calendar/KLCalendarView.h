@@ -60,7 +60,7 @@
 - (void)panToTile:(KLTile *)tile;
 - (KLTile *)leftNeighborOfTile:(KLTile *)tile;
 - (KLTile *)rightNeighborOfTile:(KLTile *)tile;
-- (void)redrawNeighborsAndTile:(KLTile *)tile;			// when zooming in, only redraw the chosen tile and adjacent tiles
+- (void)redrawNeighborsAndTile:(KLTile *)tile; // when zooming in, only redraw the chosen tile and adjacent tiles
 - (NSString *)selectedMonthName;
 - (NSInteger)selectedMonthNumberOfWeeks;
 - (NSInteger)selectedYear;

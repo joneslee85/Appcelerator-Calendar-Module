@@ -78,7 +78,7 @@ static BOOL IsLeapYear(NSInteger year)
     // super is an NSObject and does not implement NSCoding, so we use designated initializer instead
     if (![super init])
         return nil;
-    
+
     [decoder decodeValueOfObjCType:@encode(NSInteger) at:(void*)&_year];
     [decoder decodeValueOfObjCType:@encode(NSInteger) at:(void*)&_month];
     [decoder decodeValueOfObjCType:@encode(NSInteger) at:(void*)&_day];
@@ -101,11 +101,11 @@ static BOOL IsLeapYear(NSInteger year)
     NSInteger selfComposite = ([self yearOfCommonEra]*10000) 
                             + ([self monthOfYear]*100)
                             + [self dayOfMonth];
-    
+
     NSInteger otherComposite = ([otherDate yearOfCommonEra]*10000) 
                              + ([otherDate monthOfYear]*100)
                              + [otherDate dayOfMonth];
-    
+
     if (selfComposite < otherComposite)
         return NSOrderedAscending;
     else if (selfComposite == otherComposite)
@@ -116,43 +116,43 @@ static BOOL IsLeapYear(NSInteger year)
 
 -(NSComparisonResult) compareWithNSDate: (NSDate*) date
 {
-	NSInteger selfComposite = ([self yearOfCommonEra]*10000) 
-	+ ([self monthOfYear]*100)
-	+ [self dayOfMonth];
-    
-	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-	NSDateComponents* components = [gregorian components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:date];
-	
-	NSInteger otherComposite = ([components year] *10000) 
-	+ ([components month]*100)
-	+ [components day];
-	
-	//NSLog(@"%d %f", selfComposite, otherComposite); 
+    NSInteger selfComposite = ([self yearOfCommonEra]*10000) 
+        + ([self monthOfYear]*100)
+        + [self dayOfMonth];
+
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents* components = [gregorian components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:date];
+
+    NSInteger otherComposite = ([components year] *10000) 
+        + ([components month]*100)
+        + [components day];
+
+    //NSLog(@"%d %f", selfComposite, otherComposite); 
     
     if (selfComposite < otherComposite)
         return NSOrderedAscending;
     else if (selfComposite == otherComposite)
-	{
-//		NSLog(@"same");
-		return NSOrderedSame;
-	}
+    {
+        // NSLog(@"same");
+        return NSOrderedSame;
+    }
     else
         return NSOrderedDescending;
 }
 
 -(NSDate*) toNSDate
 {
-	NSDateComponents* components = [[NSDateComponents alloc] init];
-	[components setDay: [self dayOfMonth]];
-	[components setMonth:[self monthOfYear]];
-	[components setYear:[self yearOfCommonEra]];
-	
-	NSCalendar *gregorian = [[NSCalendar alloc]
-							 initWithCalendarIdentifier:NSGregorianCalendar];
-    
-	NSDate *date = [gregorian dateFromComponents:components];
- 
-	return date;
+    NSDateComponents* components = [[NSDateComponents alloc] init];
+    [components setDay: [self dayOfMonth]];
+    [components setMonth:[self monthOfYear]];
+    [components setYear:[self yearOfCommonEra]];
+
+    NSCalendar *gregorian = [[NSCalendar alloc]
+        initWithCalendarIdentifier:NSGregorianCalendar];
+
+    NSDate *date = [gregorian dateFromComponents:components];
+
+    return date;
 }
 
 - (BOOL)isEarlierThan:(KLDate *)aDate
@@ -187,29 +187,29 @@ static BOOL IsLeapYear(NSInteger year)
 - (NSString *)description
 {
     if([self monthOfYear] <10 && [self dayOfMonth]<10 )
-		return [NSString stringWithFormat:@"%ld-0%ld-0%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)[self dayOfMonth]];
-	else if([self monthOfYear] <10)
-		return [NSString stringWithFormat:@"%ld-0%ld-%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)[self dayOfMonth]];
-	else if ([self dayOfMonth]<10)
-		return [NSString stringWithFormat:@"%ld-%ld-0%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)[self dayOfMonth]];
-	else
-		return [NSString stringWithFormat:@"%ld-%ld-%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)[self dayOfMonth]];
+        return [NSString stringWithFormat:@"%ld-0%ld-0%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)[self dayOfMonth]];
+    else if([self monthOfYear] <10)
+        return [NSString stringWithFormat:@"%ld-0%ld-%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)[self dayOfMonth]];
+    else if ([self dayOfMonth]<10)
+        return [NSString stringWithFormat:@"%ld-%ld-0%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)[self dayOfMonth]];
+    else
+        return [NSString stringWithFormat:@"%ld-%ld-%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)[self dayOfMonth]];
 }
 -(NSString*)previousDay
 {
-	if([self monthOfYear] <10 && [self dayOfMonth]<11 )
-		return [NSString stringWithFormat:@"%ld-0%ld-0%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)([self dayOfMonth]+1)];
-	else if([self monthOfYear] <10)
-		return [NSString stringWithFormat:@"%ld-0%ld-%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)([self dayOfMonth]+1)];
-	else if ([self dayOfMonth]<11)
-		return [NSString stringWithFormat:@"%ld-%ld-0%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)([self dayOfMonth]+1)];
-	else
-		return [NSString stringWithFormat:@"%ld-%ld-%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)([self dayOfMonth]+1)];
+    if([self monthOfYear] <10 && [self dayOfMonth]<11 )
+        return [NSString stringWithFormat:@"%ld-0%ld-0%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)([self dayOfMonth]+1)];
+    else if([self monthOfYear] <10)
+        return [NSString stringWithFormat:@"%ld-0%ld-%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)([self dayOfMonth]+1)];
+    else if ([self dayOfMonth]<11)
+        return [NSString stringWithFormat:@"%ld-%ld-0%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)([self dayOfMonth]+1)];
+    else
+        return [NSString stringWithFormat:@"%ld-%ld-%ld",(long)[self yearOfCommonEra],(long)[self monthOfYear],(long)([self dayOfMonth]+1)];
 }
 
 #pragma mark NSCalendarDate-like interface
-- (NSInteger)yearOfCommonEra 
-{ 
+- (NSInteger)yearOfCommonEra
+{
     return _year;
 }
 
@@ -237,19 +237,19 @@ static BOOL IsLeapYear(NSInteger year)
         return NO;
     else if ([anotherDate yearOfCommonEra] - _year == 1)
         return [self isTheLastDayOfTheYear] && [anotherDate isTheFirstDayOfTheYear];
-    
+
     // at this point, I know that self and anotherDate are both in the same year
     if ([anotherDate monthOfYear] - _month > 1)
         return NO;
     else if (_month == [anotherDate monthOfYear])
         return [anotherDate dayOfMonth] - _day == 1;
-    
+
     // at this point, self is in the month before anotherDate
     if ([anotherDate dayOfMonth] != 1)
         return NO;
-    
+
     // at this point, self is in the month before anotherDate, and anotherDate is the first day in its month
-    
+
     switch (_month) {
         case 1:
             return _day == 31;

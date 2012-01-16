@@ -6,9 +6,9 @@ name: calendar
 moduleid: com.company.calendar
 version: 0.1
 description: Calendar module
-author: Your Name
-license: Specify your license
-copyright: Copyright (c) 2010 by Your Company
+author: Trung LE, Huy LE
+license: MIT
+copyright: Copyright (c) 2012 by Trung LE
 platform: iphone
-minsdk: 1.7.5
+minsdk: 1.8.0.1
 depends: database
