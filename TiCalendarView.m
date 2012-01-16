@@ -270,6 +270,7 @@
 	{		
 		((CheckmarkTile*) t).checkmarked = [self dateChecked: t.date];
 	}
+    [grid redrawAllTiles];
 }
 
 - (void) setMonth: (NSNumber*) value
