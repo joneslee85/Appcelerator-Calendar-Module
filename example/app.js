@@ -23,6 +23,9 @@ for(i=0;i<8;i++){
 }
 calendarView.setDates(datesArray);
 
+calendarView.addEventListener('monthSelected', function (e) {
+    Ti.API.log(e);
+});
 
 calendarView.addEventListener('dateSelected', function(e) {
   try {
