@@ -19,7 +19,7 @@
     if (self.checkmarked) {
         unichar	character = 0x00B7; //Unicode checkmark
         CGContextSaveGState(ctx);
-        CGContextSetFillColorWithColor(ctx, [[UIColor colorWithRed:0.2f green:0.0f blue:1.0f alpha:1.0f] CGColor]);
+        CGContextSetFillColorWithColor(ctx, [[UIColor colorWithRed:0.5f green:0.0f blue:1.0f alpha:1.0f] CGColor]);
      //   CGContextSetShadowWithColor(ctx, CGSizeMake(0.0f, -1.0f), 1.0f, [[UIColor blackColor] CGColor]);
         NSString *checkmark = [NSString stringWithCharacters:&character length:1];
         [checkmark drawInRect:CGRectMake(4, 14, width-8, height-8) withFont: [UIFont boldSystemFontOfSize:0.85f*width] lineBreakMode: UILineBreakModeClip alignment: UITextAlignmentCenter];
