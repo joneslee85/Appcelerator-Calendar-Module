@@ -50,6 +50,7 @@
 
 @property(nonatomic, assign) id <KLCalendarViewDelegate> delegate;
 @property(nonatomic, retain) KLGridView *grid;
+@property(nonatomic, assign) NSInteger numTiles;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id <KLCalendarViewDelegate>)delegate;
 

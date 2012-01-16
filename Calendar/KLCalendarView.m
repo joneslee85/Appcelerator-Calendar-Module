@@ -55,7 +55,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 
 @implementation KLCalendarView
 
-@synthesize delegate, grid = _grid;
+@synthesize delegate, numTiles, grid = _grid;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id <KLCalendarViewDelegate>)aDelegate
 {
@@ -164,6 +164,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 //
 - (void)addTilesToGrid:(KLGridView *)grid
 {
+    numTiles = 0;
     // tiles for dates that belong to the final week of the previous month
     for (KLDate *date in [_model daysInFinalWeekOfPreviousMonth]) {
 		KLTile *tile = [self.delegate calendarView:self createTileForDate:date];
@@ -174,6 +175,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
         tile.alpha = 0.4f;
         [grid addTile:tile];
         [tile release];
+        numTiles++;
     }
     
     // tiles for dates that belong to the selected month
@@ -185,6 +187,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
         tile.text = [NSString stringWithFormat:@"%ld", (long)[date dayOfMonth]];
         [grid addTile:tile];
         [tile release];
+        numTiles++;
     }
     
     // tiles for dates that belong to the first week of the following month
@@ -197,6 +200,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
         tile.alpha = 0.4f;
         [grid addTile:tile];
         [tile release];
+        numTiles++;
     }
 }
 
@@ -263,7 +267,6 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 {
     [self.grid removeAllTiles];
     [self addTilesToGrid:self.grid];
-
     [self.delegate didChangeMonths];
 }
 
