@@ -147,12 +147,24 @@ static void InitKLTile()
     //       so instead I have to manually clip each letter and draw the gradient
     CGContextSetFillColorWithColor(ctx, kDarkCharcoalColor);
     CGContextSetTextDrawingMode(ctx, kCGTextClip);
+
+    CGFloat left = 0;
+
     for (NSInteger i = 0; i < [self.text length]; i++) {
         NSString *letter = [self.text substringWithRange:NSMakeRange(i, 1)];
         CGSize letterSize = [letter sizeWithFont:[UIFont boldSystemFontOfSize:numberFontSize]];
         
         CGContextSaveGState(ctx);  // I will need to undo this clip after the letter's gradient has been drawn
-        [letter drawAtPoint:CGPointMake(10.0f+(letterSize.width*i), 11.0f) withFont:[UIFont boldSystemFontOfSize:numberFontSize]];
+
+        if (left == 0) {
+            if ([self.text length] == 1) {
+                left = (self.bounds.size.width - letterSize.width)/2;
+            } else {
+                left = (self.bounds.size.width - (letterSize.width * 2))/2;
+            }
+        }
+
+        [letter drawAtPoint:CGPointMake(left+(letterSize.width*i), 11.0f) withFont:[UIFont boldSystemFontOfSize:numberFontSize]];
         
         if ([self.date isToday]) {
             CGContextSetFillColorWithColor(ctx, kTileTodayTextColor);
