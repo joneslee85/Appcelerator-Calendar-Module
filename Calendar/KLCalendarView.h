@@ -62,6 +62,8 @@
 - (void)redrawNeighborsAndTile:(KLTile *)tile;			// when zooming in, only redraw the chosen tile and adjacent tiles
 - (NSString *)selectedMonthName;
 - (NSInteger)selectedMonthNumberOfWeeks;
+- (NSInteger)selectedYear;
+- (NSInteger)selectedMonth;
 
 @end
 

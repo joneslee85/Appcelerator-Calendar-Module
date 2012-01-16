@@ -453,7 +453,15 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
     return [_model selectedMonthNumberOfWeeks];
 }
 
+- (NSInteger)selectedYear
+{
+    return [_model selectedYear];
+}
 
+- (NSInteger)selectedMonth
+{
+    return [_model selectedMonth];
+}
 // --------------------------------------------------------------------------------------------
 //      touchesBegan:withEvent:
 // 

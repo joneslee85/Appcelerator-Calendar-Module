@@ -40,6 +40,7 @@
 - (NSString *)selectedMonthName;
 - (NSInteger)selectedMonthNumberOfWeeks;
 - (NSInteger)selectedYear;
+- (NSInteger)selectedMonth;
 - (NSString *)dayNameAbbreviationForDayOfWeek:(NSUInteger)dayOfWeek;
 
 - (NSArray *)daysInFinalWeekOfPreviousMonth;

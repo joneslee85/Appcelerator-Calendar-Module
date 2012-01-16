@@ -204,6 +204,12 @@
 	myTableView.frame = f2;
 	[self bringSubviewToFront:myTableView];
 	tile = nil;
+
+    NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSString stringWithFormat: @"%d", [calendarView selectedYear]], @"year",
+                           [NSString stringWithFormat: @"%d", [calendarView selectedMonth]], @"month",
+                           nil];
+    [self.proxy fireEvent:@"monthSelected" withObject:event];
 }
 
 -(bool) dateChecked: (KLDate*) date

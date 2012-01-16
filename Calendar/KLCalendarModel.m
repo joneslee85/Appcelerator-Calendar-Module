@@ -80,6 +80,11 @@
     return [_calendarInfo year];
 }
 
+- (NSInteger)selectedMonth
+{
+    return [_calendarInfo month];
+}
+
 - (NSInteger)selectedMonthNumberOfWeeks
 {
     return (NSInteger)[_calendarInfo weeksInMonth];
