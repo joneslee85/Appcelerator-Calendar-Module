@@ -209,6 +209,7 @@
     NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:
                            [NSString stringWithFormat: @"%d", [calendarView selectedYear]], @"year",
                            [NSString stringWithFormat: @"%d", [calendarView selectedMonth]], @"month",
+                           [NSString stringWithFormat: @"%d", [calendarView numTiles]], @"tiles",
                            nil];
     [self.proxy fireEvent:@"monthSelected" withObject:event];
 }
