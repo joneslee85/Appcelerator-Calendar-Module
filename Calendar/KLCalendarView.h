@@ -55,6 +55,8 @@
 - (id)initWithFrame:(CGRect)frame delegate:(id <KLCalendarViewDelegate>)delegate;
 
 - (BOOL)isZoomedIn;
+- (void)moveMonthNext;
+- (void)moveMonthBack;
 - (void)zoomInOnTile:(KLTile *)tile;
 - (void)zoomOutFromTile:(KLTile *)tile;
 - (void)panToTile:(KLTile *)tile;

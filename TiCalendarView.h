@@ -31,9 +31,12 @@
 
 - (void) setDatesArray: (NSArray*) datesArray;
 - (void) setMonth: (NSNumber*) value;
+- (void) moveMonthNext;
+- (void) moveMonthBack;
 - (void) setCalendarColor_: (id) color;
 - (void) setHeaderColor_: (id) color;
 - (bool) dateChecked: (KLDate*) date;
+
 
 //-(UIView*) calendar;
 

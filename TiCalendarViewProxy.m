@@ -54,14 +54,36 @@
     [((TiCalendarView* ) self.view) setDatesArray:datesArray];
 }
 
+
 -(NSNumber*) month
 {
     return [((TiCalendarView* ) self.view) month];
 }
 
+/*
 - (void) setMonth: (NSNumber*) value
 {
+
+    ENSURE_TYPE(value, NSNumber);
+    NSLog(@"%@", value);
+    
     [((TiCalendarView* ) self.view) setMonth:value];
+}
+*/
+- (void) moveMonthNext: (NSNumber*) intMonth
+{
+    [((TiCalendarView* ) self.view) moveMonthNext];
+}
+
+-(void) moveMonthBack:(NSNumber *)intMonth
+{
+    [((TiCalendarView* ) self.view) moveMonthBack];
+}
+
+- (void) setCalendarColor:(id)color
+{
+    ENSURE_TYPE(color, NSString);
+    [((TiCalendarView* ) self.view) setCalendarColor_:color];
 }
 
 - (id) saveEvent: (id) args

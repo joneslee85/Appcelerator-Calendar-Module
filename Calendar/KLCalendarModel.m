@@ -34,6 +34,7 @@
         return nil;
 
     _calendarInfo = [[THCalendarInfo alloc] init];
+    
     [_calendarInfo setDate:[NSDate date]];
 
     _cal = CFCalendarCopyCurrent();
@@ -68,6 +69,7 @@
 - (void)incrementMonth
 {
     [_calendarInfo moveToNextMonth];
+    
 }
 
 - (NSString *)selectedMonthName

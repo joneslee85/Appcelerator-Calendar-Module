@@ -424,6 +424,7 @@ static SDCalendarHourFormat MyDefaultHourFormat;
 - (void) moveToNextMonth
 {
     [self adjustMonths: 1];
+    
 }
 
 - (void) moveToNextYear

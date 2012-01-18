@@ -83,7 +83,6 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 //
 - (void)drawDayNamesInContext:(CGContextRef)ctx
 {
-    NSLog(@"%f", self.bounds.size.width);
 
     CGContextSaveGState(ctx);
     CGContextSetFillColorWithColor(ctx, kTileRegularTopColor);
@@ -99,8 +98,6 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
         CGFloat fontSize = 0.25f * columnWidth;
         CGFloat xOffset = columnIndex * columnWidth;
         CGFloat yOffset = (0.94f * [self headerHeight]) - fontSize;
-
-        // NSLog(@"col width = %f7, fontSize = %f", columnWidth, fontSize);
 
         [header drawInRect:CGRectMake(xOffset, yOffset, columnWidth, fontSize) withFont: [UIFont boldSystemFontOfSize:fontSize] lineBreakMode: UILineBreakModeClip alignment: UITextAlignmentCenter];
     }
@@ -191,6 +188,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
     }
 
     // tiles for dates that belong to the first week of the following month
+    
     for (KLDate *date in [_model daysInFirstWeekOfFollowingMonth]) {
         KLTile *tile = [self.delegate calendarView:self createTileForDate:date];
         [tile addTarget:self action:@selector(showFollowingMonth) forControlEvents:UIControlEventTouchUpInside];
@@ -218,8 +216,6 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
     CGRect previousMonthButtonFrame = CGRectMake(self.bounds.origin.x,
                                                  self.bounds.origin.y, 
                                                  KL_CHANGE_MONTH_BUTTON_WIDTH,                                                  KL_CHANGE_MONTH_BUTTON_HEIGHT);
-
-    NSLog(@"Button view frame: %@", NSStringFromCGRect(previousMonthButtonFrame));
 
     UIButton *previousMonthButton = [[UIButton alloc] initWithFrame:previousMonthButtonFrame];
     // [previousMonthButton setTitle:@"<<<" forState:UIControlStateNormal];
@@ -270,6 +266,16 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
     [self.delegate didChangeMonths];
 }
 
+-(void)moveMonthNext
+{
+  [self performSelectorOnMainThread:@selector(showFollowingMonth) withObject:nil waitUntilDone:false];
+}
+
+-(void)moveMonthBack
+{
+    [self performSelectorOnMainThread:@selector(showPreviousMonth) withObject:nil waitUntilDone:false];
+}
+ 
 // --------------------------------------------------------------------------------------------
 //      refreshViewWithPushDirection:
 // 
@@ -279,7 +285,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 {
     // Update the header month and year
     _selectedMonthLabel.text = [NSString stringWithFormat:@"%@ %ld", [_model selectedMonthName], (long)[_model selectedYear]];
-
+   
     if (!caTransitionSubtype) {   // refresh without animation
         [self clearAndFillGrid];
         return;
@@ -308,9 +314,10 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 //
 - (void)showPreviousMonth
 {
+    
     if ([self isZoomedIn])
         return;  // do not allow it when zoomed in
-
+    
     [_model decrementMonth];
     [self refreshViewWithPushDirection:kCATransitionFromLeft];
 }
@@ -325,9 +332,10 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 
 - (void)showFollowingMonth
 {
+ 
     if ([self isZoomedIn])
-        return;  // do not allow it when zoomed in
-
+        return;  // do not allow it when zoomed in    
+    
     [_model incrementMonth];
     [self refreshViewWithPushDirection:kCATransitionFromRight];
 }

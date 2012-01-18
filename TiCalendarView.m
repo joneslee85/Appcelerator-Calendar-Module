@@ -19,7 +19,6 @@
 
 - (id) init
 {
-    // NSLog(@"Init view");
 
     self = [super init];
     if (self != nil)
@@ -31,7 +30,6 @@
         id c = [self.proxy valueForUndefinedKey:@"calendarColor"];
         if ( c != nil )
         {
-            NSLog(@"Setting color: %@", c);
             TiColor *color = [TiUtils colorValue:c];
             [calendarView setBackgroundColor:[color _color]];
         }
@@ -115,7 +113,6 @@
 /*----- Calendar Delegates -----> */
 
 - (void)calendarView:(KLCalendarView *)calView tappedTile:(KLTile *)aTile{
-    NSLog(@"Date Selected is %@",[aTile date]);
 
     [aTile flash];
 
@@ -136,8 +133,6 @@
 
 
     [self.proxy fireEvent:@"dateSelected" withObject: data propagate:NO];
-
-    NSLog(@"Date after exit method is %@", data);
 //    [self _fireEventToListener:@"dateSelected" withObject:[aTile date] listener:callback thisObject:nil];
 }
 
@@ -281,17 +276,27 @@
     [grid redrawAllTiles];
 }
 
+
 - (void) setMonth: (NSNumber*) value
 {
     self.month = value;
-    NSLog(@"%@", value);
+   // NSLog(@"You just setmonth%@", value);
+}
+
+- (void) moveMonthNext
+{
+    [calendarView moveMonthNext];
+}
+- (void) moveMonthBack
+{
+    [calendarView moveMonthBack];
 }
 
 - (void) setCalendarColor_: (id) color
 {
     TiColor*  c = [TiUtils colorValue:color];
     UIColor * newColor = [c _color];
-    NSLog(@"Set color %@", c);
+
     if ( newColor != nil)
     {
         [calendarView setBackgroundColor:newColor];
@@ -315,7 +320,6 @@
 
 -(void)_destroy
 {
-    NSLog(@"destroy");
     RELEASE_TO_NIL(dates);
 }
 

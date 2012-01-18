@@ -32,5 +32,6 @@ int main(int argc, char *argv[]) {
     int retVal = UIApplicationMain(argc, argv, nil, @"KCalendarAppDelegate");
     [pool release];
     return retVal;
+    
 }
 #endif

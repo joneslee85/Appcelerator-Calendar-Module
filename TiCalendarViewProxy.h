@@ -17,5 +17,8 @@
 
 - (void) setDates: (NSArray*) datesArray;
 - (void) setMonth: (NSNumber*) value;
+- (void) setCalendarColor: (id) color;
 - (id) saveEvent: (id) args;
+- (void) moveMonthNext: (NSNumber*)intMonth;
+- (void) moveMonthBack: (NSNumber*)intMonth;
 @end
