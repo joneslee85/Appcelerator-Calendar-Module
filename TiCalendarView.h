@@ -9,7 +9,6 @@
 
 #import "KLCalendarView.h"
 #import "KLTile.h"
-#import "CheckmarkTile.h"
 
 @interface TiCalendarView : TiUIView<KLCalendarViewDelegate, UITableViewDelegate, UITableViewDataSource> {
 
@@ -39,6 +38,10 @@
 
 
 //-(UIView*) calendar;
+
+
+@end
+UIView*) calendar;
 
 
 @end

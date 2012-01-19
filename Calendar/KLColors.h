@@ -27,10 +27,11 @@
 extern CGColorRef kSlateBlueColor, kGridDarkColor, kGridLightColor, kCheckmarkColor,
 kCalendarHeaderLightColor, kCalendarHeaderDarkColor,
 kCalendarBodyLightColor, kCalendarBodyDarkColor,
-kLightCharcoalColor, kDarkCharcoalColor,
+kLightCharcoalColor, kDarkCharcoalColor,kBlackCharcoalColor,
 kTileRegularTopColor, kTileRegularBottomColor,
 kTileDimTopColor, kTileDimBottomColor,
-kTileTodayBGColor, kTileTodayTextColor;
+kTileTodayBGColor, kTileTodayTextColor, kBlackColor, kTileNormalBGColor,
+kTilePinkColor, kTilePurpleColor;
 
 extern CGColorRef kBlackColor, kWhiteColor;
 

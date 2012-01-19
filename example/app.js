@@ -31,30 +31,28 @@ var flexSpace = Titanium.UI.createButton({
 			backgroundColor : '#83389b',
 			labels : ['List', 'Day', 'Month']
 		});
+
 win.add(refresh);
 win.add(calendarView);
 
 var today = new Date();
 var datesArray = [];//[today, nextFiveDay];
 
-for(i=0;i<8;i++){
+for(i=0;i<20;i++){
 	var nextDay = new Date();
 	nextDay.setDate(today.getDate() + i);
 	//Ti.API.info("test: " + nextDay.toDateString());
 	datesArray.push(nextDay);
 }
+calendarView.setDates(datesArray);
 
-Ti.API.info('move month -----------------');
-for(var i=0;i<10;i++){
-	calendarView.moveMonthBack(1);
-}
 refresh.addEventListener('click', function(e){
-	Ti.API.info("dit me ");
+	Ti.API.info("fuk");
 });
 
 calendarView.addEventListener('dateSelected', function(e) {
   try {
-   // Ti.API.info(e.date);
+    Ti.API.info(e.date);
   } catch(e) {
   //  Ti.API.info(e);
   }
@@ -63,4 +61,4 @@ calendarView.addEventListener('dateSelected', function(e) {
 //win.toolbar = [refresh, flexSpace, bb1, flexSpace, bttoday];
 win.open();
 
-//calendarView.setCalendarColor('blue');
+//calendarView.setCalendarColor('white');

@@ -4,8 +4,9 @@
 
 @interface CheckmarkTile : KLTile
 {
-    BOOL checkmarked;
+   // BOOL checkmarked;
 }
-@property (nonatomic, assign) BOOL checkmarked;
+
+//@property (nonatomic, assign) BOOL checkmarked;
 
 @end

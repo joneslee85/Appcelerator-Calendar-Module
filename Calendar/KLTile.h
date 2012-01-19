@@ -31,11 +31,15 @@
     NSString *_text;
     CGColorRef _textTopColor;
     CGColorRef _textBottomColor;
+    CGColorRef _todayTextColor;
+    CGColorRef _todayBGColor;
     KLDate *_date;
+    BOOL checkmarked;
 }
 
 @property(nonatomic, retain) NSString *text;
 @property(nonatomic, retain) KLDate *date;
+@property(nonatomic, assign) BOOL checkmarked;
 
 - (id)init; // designated initializer
 
@@ -46,6 +50,7 @@
 - (CGColorRef)textBottomColor;
 - (void)setTextBottomColor:(CGColorRef)color;
 - (void)restoreBackgroundColor;
+- (void)setCheckmarked:(BOOL)checkmarked;
 
 @end
 

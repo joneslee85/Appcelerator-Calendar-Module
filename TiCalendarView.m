@@ -140,31 +140,17 @@
 
     //NSLog(@"createTileForDate: %@", date);
 
-    CheckmarkTile *t = [[CheckmarkTile alloc] init];
+    //CheckmarkTile *t = [[CheckmarkTile alloc] init];
+    KLTile *t = [[KLTile alloc] init];
     t.checkmarked = NO;//based on any condition you can checkMark a tile
 
     bool checked = [self dateChecked: date];
 
-    /*
-    int index = [dates indexOfObjectPassingTest:^(id obj, NSUInteger idx, BOOL *stop) {
-        if ( [date compareWithNSDate: ((NSDate*) obj)] == NSOrderedSame)
-        {
-    //        NSLog(@"Same %@ with %@", date, obj);
-            *stop =YES;
-            return YES;
-        }
-        return NO;
-    }];
-    */
-    // NSLog(@"index: %d", index);
-
     if ( checked )
     {
-        ((CheckmarkTile*) t).checkmarked = YES;
+        t.checkmarked = YES;
         [t setNeedsDisplay];
     }
-
-    // t.backgroundColor = calendarView.backgroundColor;
 
     return t;
 
@@ -211,34 +197,9 @@
 
 -(bool) dateChecked: (KLDate*) date
 {
-//    NSLog(@"datechecked %@", date);
-/*
-    bool found=false;
-    for ( int i=0; i< dates.count; i++)
-    {
-        NSDate* obj = [dates objectAtIndex:i];
-    //    NSLog(@"Comparing %@ with %@", date, obj);
-        if ( [date compareWithNSDate: ((NSDate*) obj)] == NSOrderedSame)
-        {
-            found = TRUE;
-            break;
-        }
-    
-        if (found) break;
-    }
-    NSLog(@"index: %d", found);
-*/
-
     MroBinarySearch* binarySearch = [[MroBinarySearch alloc] initWithArray:dates];    
     NSInteger index=    [binarySearch binarySearch:date usingFunction: KLDateSort context:NULL];
-//    NSLog(@"bs1 index: %d", index);
 
-    /*    NSInteger bs1 = [dates binarySearch:[date toNSDate]];
-    NSLog(@"bs1 index: %d", bs1);
-    
-    NSInteger bs = [dates binarySearch:date usingFunction:KLDateSort context:NULL];
-    NSLog(@"bs index: %d", bs);
-*/
 
     return ( index >=0 && dates.count > 0 );
 }
@@ -267,6 +228,64 @@
 
     // NSLog(@"Dates: %@", dates);
     //    NSLog(@"Retain Count: %d, %d", dates.retainCount, [[dates objectAtIndex:0] retainCount]);
+
+    KLGridView* grid = calendarView.grid ;
+    for ( KLTile* t in grid.tiles )
+    {
+        t.checkmarked = [self dateChecked: t.date];
+    }
+    [grid redrawAllTiles];
+}
+
+
+- (void) setMonth: (NSNumber*) value
+{
+    self.month = value;
+   // NSLog(@"You just setmonth%@", value);
+}
+
+- (void) moveMonthNext
+{
+    [calendarView moveMonthNext];
+}
+- (void) moveMonthBack
+{
+    [calendarView moveMonthBack];
+}
+
+- (void) setCalendarColor_: (id) color
+{
+    TiColor*  c = [TiUtils colorValue:color];
+    UIColor * newColor = [c _color];
+
+    if ( newColor != nil)
+    {
+        [calendarView setBackgroundColor:newColor];
+    }
+
+    KLGridView* grid = calendarView.grid ;
+    for ( KLTile* t in grid.tiles )
+    {
+        t.backgroundColor = newColor;
+    }
+}
+
+- (void) setHeaderColor_: (id) color
+{
+    UIColor * newColor = [[TiUtils colorValue:color] _color];
+    if ( newColor != nil)
+    {
+        // [myHeaderView setBackgroundColor:newColor];
+    }
+}
+
+-(void)_destroy
+{
+    RELEASE_TO_NIL(dates);
+}
+
+@end
+%d, %d", dates.retainCount, [[dates objectAtIndex:0] retainCount]);
 
     KLGridView* grid = calendarView.grid ;
     for ( KLTile* t in grid.tiles )

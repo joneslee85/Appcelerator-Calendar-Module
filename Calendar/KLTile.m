@@ -46,6 +46,7 @@
 #import "KLTile.h"
 #import "KLDate.h"
 #import "KLColors.h"
+#import <QuartzCore/QuartzCore.h>
 
 static CGGradientRef TextFillGradient;
 
@@ -56,8 +57,13 @@ static void InitKLTile()
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
 
     CGColorRef rawColors[2];
-    rawColors[0] = CreateRGB(0.173f, 0.212f, 0.255f, 1.0f);
-    rawColors[1] = CreateRGB(0.294f, 0.361f, 0.435f, 1.0f);
+   // rawColors[0] = CreateRGB(0.173f, 0.212f, 0.255f, 1.0f);
+  //  rawColors[1] = CreateRGB(0.294f, 0.361f, 0.435f, 1.0f);
+   // rawColors[0] = CreateRGB(0.6f, 0.06f, 0.67f, 1.0f);
+  //  rawColors[1] = CreateRGB(0.6f, 0.06f, 0.67f, 1.0f);
+    
+    rawColors[0] = CreateRGB(0.0f, 0.0f, 0.0f, 1.0f);
+    rawColors[1] = CreateRGB(0.0f, 0.0f, 0.0f, 1.0f);
 
     CFArrayRef colors = CFArrayCreate(NULL, (void*)&rawColors, 2, NULL);
 
@@ -78,15 +84,19 @@ static void InitKLTile()
 @implementation KLTile
 
 @synthesize text = _text, date = _date;
+//@synthesize todayTextColor = _todayTextColor, todayBGColor = _todayBGColor;
+@synthesize checkmarked;
 
 - (id)init
 {
     if (![super initWithFrame:CGRectMake(0.f, 0.f, 44.f, 44.f)])
         return nil;
 
-    self.backgroundColor = [UIColor colorWithCGColor:kCalendarBodyLightColor];
-    [self setTextTopColor:kTileRegularTopColor];
-    [self setTextBottomColor:kTileRegularBottomColor];
+    self.backgroundColor = [UIColor colorWithCGColor:kTileNormalBGColor];
+    [self setTextTopColor:kTileTodayTextColor];
+    [self setTextBottomColor:kTileTodayTextColor];
+    _todayBGColor = kTileTodayBGColor;
+    _todayTextColor = kTileTodayTextColor;
 
     self.clipsToBounds = YES;
 
@@ -133,6 +143,29 @@ static void InitKLTile()
 
 - (CGFloat)thinRectangleWidth { return 1+floorf(0.02f * self.bounds.size.width); }        // 1pt width for 46pt tile width (2pt for 4x scale factor)
 
+- (void)drawGradient:(CGRect)rect percentage:(CGFloat)percentToCover context:(CGContextRef)ctx
+{
+    CGFloat height = floorf(rect.size.height) + 4;
+    CGFloat gradientLength = percentToCover * height;
+    
+    CGColorRef startColor = CreateRGB(0.51f, 0.22f, 0.61, 0.7f);  // black 40% opaque
+    CGColorRef endColor = CreateRGB(1.0f, 1.0f, 1.0f, 0.3f);    // black  0% opaque
+    CGColorRef rawColors[2] = { startColor, endColor };
+    CFArrayRef colors = CFArrayCreate(NULL, (void*)&rawColors, 2, NULL);
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, colors, NULL);
+    
+    CGContextClipToRect(ctx, rect);
+    CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0,0), CGPointMake(0, gradientLength), kCGGradientDrawsAfterEndLocation); 
+    
+    CGGradientRelease(gradient);
+    CFRelease(colors);
+    CGColorSpaceRelease(colorSpace);
+    CGColorRelease(startColor);
+    CGColorRelease(endColor);
+    
+}
+
 - (void)drawTextInContext:(CGContextRef)ctx
 {
     CGContextSaveGState(ctx);
@@ -167,8 +200,11 @@ static void InitKLTile()
         [letter drawAtPoint:CGPointMake(left+(letterSize.width*i), 11.0f) withFont:[UIFont boldSystemFontOfSize:numberFontSize]];
         
         if ([self.date isToday]) {
-            CGContextSetFillColorWithColor(ctx, kTileTodayTextColor);
+            CGContextSetFillColorWithColor(ctx, _todayTextColor);
             CGContextFillRect(ctx, self.bounds);  
+        } else if(self.checkmarked){
+            CGContextSetFillColorWithColor(ctx, kTilePinkColor);
+            CGContextFillRect(ctx, self.bounds);
         } else {
             // nice gradient fill for all tiles except today
             CGContextDrawLinearGradient(ctx, TextFillGradient, CGPointMake(0,0), CGPointMake(0, height/3), kCGGradientDrawsAfterEndLocation);
@@ -198,34 +234,54 @@ static void InitKLTile()
     CGContextSetFillColorWithColor(ctx, kGridLightColor);
     CGContextFillRect(ctx, CGRectMake(0, lineThickness, width-lineThickness, lineThickness));                    // top
     CGContextFillRect(ctx, CGRectMake(width-2*lineThickness, lineThickness, lineThickness, height-lineThickness)); // right
+    
+     if([self.date isToday] && self.checkmarked) {
+         CGContextSaveGState(ctx);
+         CGRect innerBounds = self.bounds;
+         innerBounds.size.width -= lineThickness;
+         innerBounds.size.height -= lineThickness;
+         innerBounds.origin.y += lineThickness;
+         CGContextSetFillColorWithColor(ctx, kTilePurpleColor);
+         CGContextFillRect(ctx, innerBounds);
+         CGContextRestoreGState(ctx);
+     } else {
+            if(self.checkmarked){
+                [self drawGradient:rect percentage:1.0f context:ctx];
+            }
+            
+            // Highlight if this tile represents today
+            if ([self.date isToday]) {
+                CGContextSaveGState(ctx);
+                CGRect innerBounds = self.bounds;
+                innerBounds.size.width -= lineThickness;
+                innerBounds.size.height -= lineThickness;
+                innerBounds.origin.y += lineThickness;
+                CGContextSetFillColorWithColor(ctx, _todayBGColor);
+                CGContextFillRect(ctx, innerBounds);
+                CGContextRestoreGState(ctx);
 
-    // Highlight if this tile represents today
-    if ([self.date isToday]) {
-        CGContextSaveGState(ctx);
-        CGRect innerBounds = self.bounds;
-        innerBounds.size.width -= lineThickness;
-        innerBounds.size.height -= lineThickness;
-        innerBounds.origin.y += lineThickness;
-        CGContextSetFillColorWithColor(ctx, kTileTodayBGColor);
-        CGContextFillRect(ctx, innerBounds);
-      //  [self drawInnerShadowRect:innerBounds percentage:0.1f context:ctx];
-        CGContextRestoreGState(ctx);
-    }
+            }
+     }
 
     // Draw the # for this tile
     [self drawTextInContext:ctx];
 }
-
 // --------------------------------------------------------------------------------------------
 //      flash
 // 
 //       Flash the tile so that the user knows the tap was register but nothing will happen.
 //
+
 - (void)flash
-{
-    //self.backgroundColor = [UIColor colorWithCGColor:kTileRegularTopColor];
-    self.backgroundColor = [UIColor lightGrayColor];
-    //[self performSelector:@selector(restoreBackgroundColor) withObject:nil afterDelay:0.1f];
+{   
+    if([self.date isToday]){
+        _todayBGColor = kWhiteColor;
+        _todayTextColor = kBlackColor;
+        [self setNeedsDisplay];
+    }
+   self.layer.borderColor = [UIColor colorWithRed:0.6f green:0.06f blue:0.67f alpha:0.8].CGColor;
+   self.layer.borderWidth = 2.0f;
+    
 }
 
 // --------------------------------------------------------------------------------------------
@@ -236,7 +292,14 @@ static void InitKLTile()
 //
 - (void)restoreBackgroundColor
 {
-    self.backgroundColor = [UIColor colorWithCGColor:kCalendarBodyLightColor];
+    if([self.date isToday]){
+        _todayBGColor = kTileTodayBGColor;
+        _todayTextColor = kTileTodayTextColor;
+        [self setNeedsDisplay];
+    }else{
+        self.backgroundColor = [UIColor colorWithCGColor:kTileNormalBGColor];
+    }
+        self.layer.borderWidth = 0.0f;
 }
 
 - (CGColorRef)textTopColor { return _textTopColor; }
@@ -256,11 +319,17 @@ static void InitKLTile()
         _textBottomColor = CGColorRetain(color);
     }
 }
+- (void)setCheckmarked:(BOOL)c
+{
+    checkmarked = c;
+}
 
 - (void)dealloc
 {
     [_date release];
     [_text release];
+   // CGColorRelease(_todayBGColor);
+   // CGColorRelease(_todayTextColor);
     CGColorRelease(_textTopColor);
     CGColorRelease(_textBottomColor);
     [super dealloc];

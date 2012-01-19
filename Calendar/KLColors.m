@@ -30,10 +30,10 @@
 CGColorRef kSlateBlueColor, kGridDarkColor, kGridLightColor, kCheckmarkColor,
            kCalendarHeaderLightColor, kCalendarHeaderDarkColor,
            kCalendarBodyLightColor, kCalendarBodyDarkColor,
-           kLightCharcoalColor, kDarkCharcoalColor,
+           kLightCharcoalColor, kDarkCharcoalColor,kBlackCharcoalColor,
            kTileRegularTopColor, kTileRegularBottomColor,
            kTileDimTopColor, kTileDimBottomColor,
-           kTileTodayBGColor, kTileTodayTextColor;
+           kTileTodayBGColor, kTileTodayTextColor, kTileNormalBGColor, kBlackColor, kTilePinkColor, kTilePurpleColor;
 
 // Basic grayscale colors
 CGColorRef kBlackColor, kWhiteColor;
@@ -52,12 +52,20 @@ static void InitKColors()
     kCalendarBodyDarkColor = CreateRGB(0.784f, 0.748f, 0.804f, 1.0f);
     kLightCharcoalColor = CreateRGB(0.3f, 0.3f, 0.3f, 1.0f);
     kDarkCharcoalColor = CreateRGB(0.1f, 0.1f, 0.1f, 1.0f);
+    kBlackCharcoalColor = CreateRGB(0.0f, 0.0f, 0.0f, 1.0f);
     kTileRegularTopColor = CreateRGB(0.173f, 0.212f, 0.255f, 1.0f);
     kTileRegularBottomColor = CreateRGB(0.294f, 0.361f, 0.435f, 1.0f);
     kTileDimTopColor = CreateRGB(0.545f, 0.565f, 0.588f, 1.0f);
     kTileDimBottomColor = CreateRGB(0.600f, 0.635f, 0.675f, 1.0f);
-    kTileTodayBGColor = CreateRGB(1.0f, 1.0f, 1.0f, 1.0f);
-    kTileTodayTextColor = CreateRGB(1.0f, 0.0f, 0.0f, 1.0f);
+    kTileNormalBGColor =  CreateRGB(1.0f, 1.0f, 1.0f, 1.0f);
+    
+    kTileTodayBGColor = CreateRGB(0.74f, 0.74f, 0.74f, 1.0f);
+    kTileTodayTextColor = CreateRGB(1.0f, 1.0f, 1.0f, 1.0f);
+    
+    kTilePinkColor = CreateRGB(0.6f, 0.06f, 0.67f, 1.0f);
+    kTilePurpleColor = CreateRGB(0.51f, 0.22f, 0.61, 0.5f);
+    
+    kBlackColor = CreateRGB(0.0f, 0.0f, 0.0f, 1.0f);
 
     kBlackColor = CreateGray(0.0f, 1.0f);
     kWhiteColor = CreateGray(1.0f, 1.0f);
