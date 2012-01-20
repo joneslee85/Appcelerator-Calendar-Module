@@ -20,5 +20,6 @@
 - (void) setCalendarColor: (id) color;
 - (id) saveEvent: (id) args;
 - (void) moveMonthNext: (NSNumber*)intMonth;
+- (void) jumpToday: (NSNumber*)fakeNum;
 - (void) moveMonthBack: (NSNumber*)intMonth;
 @end

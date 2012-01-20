@@ -35,13 +35,10 @@
 - (void) setCalendarColor_: (id) color;
 - (void) setHeaderColor_: (id) color;
 - (bool) dateChecked: (KLDate*) date;
+- (void) jumpToday;
 
 
 //-(UIView*) calendar;
-
-
-@end
-UIView*) calendar;
 
 
 @end

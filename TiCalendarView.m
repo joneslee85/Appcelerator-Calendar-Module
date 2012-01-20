@@ -113,7 +113,6 @@
 /*----- Calendar Delegates -----> */
 
 - (void)calendarView:(KLCalendarView *)calView tappedTile:(KLTile *)aTile{
-
     [aTile flash];
 
     if(tile == nil)
@@ -143,7 +142,9 @@
     //CheckmarkTile *t = [[CheckmarkTile alloc] init];
     KLTile *t = [[KLTile alloc] init];
     t.checkmarked = NO;//based on any condition you can checkMark a tile
-
+    
+    
+    
     bool checked = [self dateChecked: date];
 
     if ( checked )
@@ -253,62 +254,24 @@
     [calendarView moveMonthBack];
 }
 
-- (void) setCalendarColor_: (id) color
+-(void) jumpToday
 {
-    TiColor*  c = [TiUtils colorValue:color];
-    UIColor * newColor = [c _color];
-
-    if ( newColor != nil)
-    {
-        [calendarView setBackgroundColor:newColor];
-    }
-
     KLGridView* grid = calendarView.grid ;
-    for ( KLTile* t in grid.tiles )
+    for ( KLTile* aTile in grid.tiles )
     {
-        t.backgroundColor = newColor;
+        if([aTile.date isToday]){ 
+            aTile.selected = true;
+            if(tile != nil){
+                [tile removeLayer];
+            }
+            tile = aTile;
+            [aTile jumpToday];
+            NSMutableDictionary* data = [NSMutableDictionary dictionaryWithObjectsAndKeys:                        [[aTile date] toNSDate],@"date",                        nil];
+
+            [self.proxy fireEvent:@"dateSelected" withObject: data propagate:NO];
+        }
     }
-}
-
-- (void) setHeaderColor_: (id) color
-{
-    UIColor * newColor = [[TiUtils colorValue:color] _color];
-    if ( newColor != nil)
-    {
-        // [myHeaderView setBackgroundColor:newColor];
-    }
-}
-
--(void)_destroy
-{
-    RELEASE_TO_NIL(dates);
-}
-
-@end
-%d, %d", dates.retainCount, [[dates objectAtIndex:0] retainCount]);
-
-    KLGridView* grid = calendarView.grid ;
-    for ( KLTile* t in grid.tiles )
-    {
-        ((CheckmarkTile*) t).checkmarked = [self dateChecked: t.date];
-    }
-    [grid redrawAllTiles];
-}
-
-
-- (void) setMonth: (NSNumber*) value
-{
-    self.month = value;
-   // NSLog(@"You just setmonth%@", value);
-}
-
-- (void) moveMonthNext
-{
-    [calendarView moveMonthNext];
-}
-- (void) moveMonthBack
-{
-    [calendarView moveMonthBack];
+  
 }
 
 - (void) setCalendarColor_: (id) color

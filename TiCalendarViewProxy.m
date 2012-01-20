@@ -80,6 +80,12 @@
     [((TiCalendarView* ) self.view) moveMonthBack];
 }
 
+-(void) jumpToday:(NSNumber *)fakeNum
+{
+    [((TiCalendarView* ) self.view) jumpToday];
+ 
+}
+
 - (void) setCalendarColor:(id)color
 {
     ENSURE_TYPE(color, NSString);

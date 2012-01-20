@@ -35,22 +35,29 @@
     CGColorRef _todayBGColor;
     KLDate *_date;
     BOOL checkmarked;
+    BOOL selected;
 }
 
 @property(nonatomic, retain) NSString *text;
 @property(nonatomic, retain) KLDate *date;
 @property(nonatomic, assign) BOOL checkmarked;
+@property(nonatomic, assign) BOOL selected;
 
 - (id)init; // designated initializer
 
-- (void)flash; // flash the tile's background color temporarily
+- (void)flash; 
+- (void)flash1;// flash the tile's background color temporarily
 
 - (CGColorRef)textTopColor;
+- (void)jumpToday;
+- (void)removeLayer;
 - (void)setTextTopColor:(CGColorRef)color;
 - (CGColorRef)textBottomColor;
 - (void)setTextBottomColor:(CGColorRef)color;
 - (void)restoreBackgroundColor;
+- (void)restoreBackgroundColor1;
 - (void)setCheckmarked:(BOOL)checkmarked;
+- (void)setSelected:(BOOL)selected;
 
 @end
 

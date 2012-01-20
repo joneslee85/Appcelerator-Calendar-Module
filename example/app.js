@@ -1,6 +1,8 @@
 // open a single window
 var win = Ti.UI.createWindow({
-	backgroundColor:'white'
+	title : 'All Calendars',
+	backgroundColor : '#FFF',
+//	layout : 'vertical',
 });
 
 var calendarView = Ti.Calendar.createView({
@@ -15,7 +17,7 @@ var flexSpace = Titanium.UI.createButton({
 
 		var refresh = Titanium.UI.createButton({
 			title: 'click me!',
-			systemButton : Titanium.UI.iPhone.SystemButton.REFRESH,
+		//	systemButton : Titanium.UI.iPhone.SystemButton.REFRESH,
 			height: 50,
 			width: 100,
 			top: 350,
@@ -24,7 +26,12 @@ var flexSpace = Titanium.UI.createButton({
 
 		var bttoday = Titanium.UI.createButton({
 			title : 'Today',
-			style : Titanium.UI.iPhone.SystemButtonStyle.BORDERED
+			style : Titanium.UI.iPhone.SystemButtonStyle.BORDERED,
+			height: 50,
+			width: 100,
+			enabled: true,
+			top: 380,
+			left: 100,
 		});
 
 		var bb1 = Titanium.UI.createButtonBar({
@@ -32,8 +39,13 @@ var flexSpace = Titanium.UI.createButton({
 			labels : ['List', 'Day', 'Month']
 		});
 
-win.add(refresh);
+bttoday.addEventListener('click', function(e){
+		calendarView.jumpToday(1);
+});
 win.add(calendarView);
+win.add(bttoday);
+//win.add(refresh);
+
 
 var today = new Date();
 var datesArray = [];//[today, nextFiveDay];
@@ -45,6 +57,9 @@ for(i=0;i<20;i++){
 	datesArray.push(nextDay);
 }
 calendarView.setDates(datesArray);
+
+//calendarView.moveMonthNext(1);
+//calendarView.moveMonthBack(1);
 
 refresh.addEventListener('click', function(e){
 	Ti.API.info("fuk");
@@ -60,5 +75,5 @@ calendarView.addEventListener('dateSelected', function(e) {
 
 //win.toolbar = [refresh, flexSpace, bb1, flexSpace, bttoday];
 win.open();
-
+calendarView.jumpToday(1);
 //calendarView.setCalendarColor('white');

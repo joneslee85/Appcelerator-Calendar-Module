@@ -86,6 +86,7 @@ static void InitKLTile()
 @synthesize text = _text, date = _date;
 //@synthesize todayTextColor = _todayTextColor, todayBGColor = _todayBGColor;
 @synthesize checkmarked;
+@synthesize selected;
 
 - (id)init
 {
@@ -244,11 +245,14 @@ static void InitKLTile()
          CGContextSetFillColorWithColor(ctx, kTilePurpleColor);
          CGContextFillRect(ctx, innerBounds);
          CGContextRestoreGState(ctx);
+         //if(self.selected){
+          //   self.layer.borderColor = [UIColor colorWithRed:0.6f green:0.06f blue:0.67f alpha:0.8].CGColor;
+           //  self.layer.borderWidth = 2.0f;
+        // }
      } else {
             if(self.checkmarked){
                 [self drawGradient:rect percentage:1.0f context:ctx];
             }
-            
             // Highlight if this tile represents today
             if ([self.date isToday]) {
                 CGContextSaveGState(ctx);
@@ -259,13 +263,15 @@ static void InitKLTile()
                 CGContextSetFillColorWithColor(ctx, _todayBGColor);
                 CGContextFillRect(ctx, innerBounds);
                 CGContextRestoreGState(ctx);
-
+            //    if(self.selected){
+             //       self.layer.borderColor = [UIColor colorWithRed:0.6f green:0.06f blue:0.67f alpha:0.8].//CGColor;
+                   // self.layer.borderWidth = 2.0f;
+               // }
             }
      }
-
     // Draw the # for this tile
     [self drawTextInContext:ctx];
-}
+   }
 // --------------------------------------------------------------------------------------------
 //      flash
 // 
@@ -273,7 +279,7 @@ static void InitKLTile()
 //
 
 - (void)flash
-{   
+{ 
     if([self.date isToday]){
         _todayBGColor = kWhiteColor;
         _todayTextColor = kBlackColor;
@@ -281,9 +287,18 @@ static void InitKLTile()
     }
    self.layer.borderColor = [UIColor colorWithRed:0.6f green:0.06f blue:0.67f alpha:0.8].CGColor;
    self.layer.borderWidth = 2.0f;
-    
 }
 
+-(void)removeLayer
+{
+    [self restoreBackgroundColor];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:false];
+}
+- (void)jumpToday
+{
+    [self flash];
+    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:false];
+}
 // --------------------------------------------------------------------------------------------
 //      restoreBackgroundColor
 // 

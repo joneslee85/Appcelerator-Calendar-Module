@@ -81,7 +81,7 @@
 		2F895D2311F903D600C6E55B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2F895D2411F903D600C6E55B /* arrow-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-right.png"; sourceTree = "<group>"; };
 		2F895D2511F903D600C6E55B /* THCalendarInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THCalendarInfo.h; sourceTree = "<group>"; };
-		2F895D2611F903D600C6E55B /* THCalendarInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THCalendarInfo.m; sourceTree = "<group>"; };
+		2F895D2611F903D600C6E55B /* THCalendarInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THCalendarInfo.m; path = Calendar/THCalendarInfo.m; sourceTree = "<group>"; };
 		2FD9F907123FD06800632593 /* MroBinarySearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MroBinarySearch.h; path = ArrayExtensions/MroBinarySearch.h; sourceTree = "<group>"; };
 		2FD9F908123FD06800632593 /* MroBinarySearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MroBinarySearch.m; path = ArrayExtensions/MroBinarySearch.m; sourceTree = "<group>"; };
 		2FD9F90B123FD0D900632593 /* KLDateSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLDateSort.h; sourceTree = "<group>"; };
@@ -147,6 +147,7 @@
 				2F895C2A11F8FA8F00C6E55B /* CalendarProxy.h */,
 				2F895C2B11F8FA8F00C6E55B /* CalendarProxy.m */,
 				2F895B5211F8E59500C6E55B /* Calendar.h */,
+				2F895D2611F903D600C6E55B /* THCalendarInfo.m */,
 				2F895B5311F8E59500C6E55B /* Calendar.m */,
 				24DD6CF71134B3F500162E58 /* CalendarModule.h */,
 				24DD6CF81134B3F500162E58 /* CalendarModule.m */,
@@ -186,7 +187,6 @@
 				2F895D2311F903D600C6E55B /* main.m */,
 				2F895D2411F903D600C6E55B /* arrow-right.png */,
 				2F895D2511F903D600C6E55B /* THCalendarInfo.h */,
-				2F895D2611F903D600C6E55B /* THCalendarInfo.m */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";

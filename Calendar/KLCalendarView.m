@@ -275,6 +275,7 @@ static const CGFloat ScaleFactor = 4.0f;  // for zooming in/out. You can try cha
 {
     [self performSelectorOnMainThread:@selector(showPreviousMonth) withObject:nil waitUntilDone:false];
 }
+
  
 // --------------------------------------------------------------------------------------------
 //      refreshViewWithPushDirection:
